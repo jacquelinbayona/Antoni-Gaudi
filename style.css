@@ -1,7 +1,0 @@
-body {
-  background: var(--night);
-  color: var(--cream);
-  font-family: 'DM Mono', monospace;
-  overflow-x: hidden;
-  cursor: none;
-}
