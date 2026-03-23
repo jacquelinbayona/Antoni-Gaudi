@@ -19,6 +19,18 @@ body {
   overflow-x: hidden;
   cursor: none;
 }
+:root {
+  --cream: #f2ead8;
+  --terracotta: #c4622d;
+  --red: #ff1313;
+  --mosaic-blue: #1a3f8f;
+  --mosaic-gold: #ffde21;
+  --night: #0c0f14;
+  --night2: #141820;
+  --gaudi-green: #3a6b4a;
+  --stone: #8a8070;
+  --wagon-grey: #b8c4d0;
+}
 #cursor {
   position: fixed;
   width: 12px;
@@ -47,4 +59,17 @@ body::after {
   opacity: 0.035;
   pointer-events: none;
   z-index: 9998;
+}
+/* ── WAGON WRAPPER ── */
+#wagon-wrap {
+  position: relative;
+  z-index: 20;
+  transform-origin: center center;
+  /* starts small, zooms in via GSAP */
+}
+
+#wagon-svg {
+  width: min(90vw, 680px);
+  filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.8))
+    drop-shadow(0 0 40px rgba(196, 98, 45, 0.15));
 }
