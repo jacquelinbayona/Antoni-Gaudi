@@ -1,0 +1,211 @@
+/* layout pages individuelles, hero section, galerie */
+
+/* ══════════════════════════════════
+   STATION DETAIL OVERLAY
+══════════════════════════════════ */
+#detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--night);
+  z-index: 200;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+  overflow: hidden;
+}
+#detail-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Left panel */
+.detail-left {
+  padding: 60px 48px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid rgba(242, 234, 216, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.detail-left::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 30% 70%,
+    rgba(196, 98, 45, 0.07) 0%,
+    transparent 70%
+  );
+}
+
+.detail-tag {
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 20px;
+}
+.detail-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.detail-year {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--mosaic-gold);
+  margin-bottom: 32px;
+}
+.detail-desc {
+  font-size: 13px;
+  line-height: 1.95;
+  color: rgba(242, 234, 216, 0.65);
+  max-width: 420px;
+  margin-bottom: 40px;
+}
+.detail-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(242, 234, 216, 0.08);
+}
+.fact-label {
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--mosaic-gold);
+  margin-bottom: 5px;
+}
+.fact-val {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  color: var(--white);
+}
+
+/* Right panel — mosaic visual */
+.detail-right {
+  position: relative;
+  overflow: hidden;
+  background: var(--night2);
+}
+.mosaic-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+}
+.mosaic-cell {
+  border-radius: 2px;
+  transition: opacity 0.3s;
+}
+.detail-right-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 2;
+}
+.monument-icon {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 120px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(242, 234, 216, 0.06);
+  line-height: 1;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+}
+
+/* Close + nav */
+.detail-nav {
+  position: absolute;
+  top: 28px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+}
+.detail-close {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(242, 234, 216, 0.35);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: "DM Mono", monospace;
+  transition: color 0.2s;
+}
+.detail-close:hover {
+  color: var(--terracotta);
+}
+.detail-nav-arrows button {
+  background: none;
+  border: 1px solid rgba(242, 234, 216, 0.15);
+  color: var(--white);
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 14px;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+.detail-nav-arrows button:hover {
+  border-color: var(--terracotta);
+  background: rgba(196, 98, 45, 0.1);
+}
+
+/* Gaudi ornamental border */
+.ornament {
+  position: absolute;
+  pointer-events: none;
+}
+.ornament-tl {
+  top: 16px;
+  left: 16px;
+}
+.ornament-br {
+  bottom: 16px;
+  right: 16px;
+  transform: rotate(180deg);
+}
+
+/* ── PROGRESS LINE ── */
+#progress-line {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 0%;
+  background: linear-gradient(180deg, var(--terracotta), var(--mosaic-gold));
+  z-index: 9000;
+  transition: height 0.1s;
+}
+
+/* ── GAUDI TILE PATTERN BG for map ── */
+.tile-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(196, 98, 45, 0.04) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(26, 63, 143, 0.04) 0%,
+      transparent 50%
+    );
+}

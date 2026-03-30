@@ -1,3 +1,4 @@
+/* langues */
 let currentLang = localStorage.getItem("lang") || "fr";
 let translations = {};
 

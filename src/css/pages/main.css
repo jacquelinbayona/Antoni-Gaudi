@@ -1,3 +1,4 @@
+/* tunnel, map, scroll animation */
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap");
 * {
   box-sizing: border-box;
@@ -13,19 +14,6 @@ img,
 video {
   display: block;
 }
-:root {
-  --white: #f2f0ef;
-  --terracotta: #c4622d;
-  --red: #ff2c2c;
-  --mosaic-blue: #005cbd;
-  --mosaic-gold: #ffde21;
-  --night: #0c0f14;
-  --night2: #141820;
-  --gaudi-green: #50c878;
-  --stone: #8a8070;
-  --wagon-grey: #b8c4d0;
-}
-
 *,
 *::before,
 *::after {
@@ -43,28 +31,6 @@ body {
   font-family: "DM Mono", monospace;
   overflow-x: hidden;
   cursor: none;
-}
-
-/* ── CUSTOM CURSOR ── */
-#cursor {
-  position: fixed;
-  width: 12px;
-  height: 12px;
-  background: var(--terracotta);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition:
-    width 0.2s,
-    height 0.2s,
-    background 0.2s;
-  mix-blend-mode: difference;
-}
-#cursor.hovered {
-  width: 32px;
-  height: 32px;
-  background: var(--mosaic-gold);
 }
 
 /* ── MOSAIC GRAIN OVERLAY ── */

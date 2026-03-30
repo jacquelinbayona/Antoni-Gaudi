@@ -1,0 +1,14 @@
+/* variables couleurs, reset, fonts */
+
+:root {
+  --white: #f2f0ef;
+  --terracotta: #c4622d;
+  --red: #ff2c2c;
+  --mosaic-blue: #005cbd;
+  --mosaic-gold: #ffde21;
+  --night: #0c0f14;
+  --night2: #141820;
+  --gaudi-green: #50c878;
+  --stone: #8a8070;
+  --wagon-grey: #b8c4d0;
+}
