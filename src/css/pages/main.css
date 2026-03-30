@@ -1,0 +1,576 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+video {
+  display: block;
+}
+:root {
+  --white: #f2f0ef;
+  --terracotta: #c4622d;
+  --red: #ff2c2c;
+  --mosaic-blue: #005cbd;
+  --mosaic-gold: #ffde21;
+  --night: #0c0f14;
+  --night2: #141820;
+  --gaudi-green: #50c878;
+  --stone: #8a8070;
+  --wagon-grey: #b8c4d0;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--night);
+  color: var(--white);
+  font-family: "DM Mono", monospace;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: var(--terracotta);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.2s,
+    height 0.2s,
+    background 0.2s;
+  mix-blend-mode: difference;
+}
+#cursor.hovered {
+  width: 32px;
+  height: 32px;
+  background: var(--mosaic-gold);
+}
+
+/* ── MOSAIC GRAIN OVERLAY ── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ══════════════════════════════════
+   SCENE 1 — TUNNEL + ZOOM WAGON
+══════════════════════════════════ */
+#scroll-wrapper {
+  height: 700vh;
+  position: relative;
+}
+
+#sticky-stage {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── TUNNEL ── */
+#tunnel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 60%, #1a1f2e 0%, #080a10 100%);
+}
+
+.tunnel-arch {
+  position: absolute;
+  border: 1.5px solid rgba(43, 80, 166, 0.25);
+  border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+  bottom: 0;
+  transform-origin: bottom center;
+}
+
+/* ── WAGON WRAPPER ── */
+#wagon-wrap {
+  position: relative;
+  z-index: 20;
+  transform-origin: center center;
+  /* starts small, zooms in via GSAP */
+}
+
+#wagon-svg {
+  width: min(90vw, 680px);
+  filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.8))
+    drop-shadow(0 0 40px rgba(196, 98, 45, 0.15));
+}
+
+/* Rails */
+#rails {
+  position: absolute;
+  bottom: -28px;
+  left: -60%;
+  right: -60%;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rail-line {
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #3a4550 15%,
+    #5a6570 50%,
+    #3a4550 85%,
+    transparent
+  );
+}
+.rail-ties {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 28px,
+    rgba(58, 69, 80, 0.6) 28px,
+    rgba(58, 69, 80, 0.6) 34px
+  );
+}
+
+/* ── SCROLL HINT ── */
+#scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 30;
+}
+#scroll-hint p {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(242, 234, 216, 0.35);
+  margin-bottom: 14px;
+}
+.arrow-down {
+  width: 18px;
+  height: 18px;
+  border-right: 1.5px solid var(--terracotta);
+  border-bottom: 1.5px solid var(--terracotta);
+  transform: rotate(45deg);
+  margin: 0 auto;
+  animation: bounce 1.8s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%,
+  100% {
+    transform: rotate(45deg) translate(0, 0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: rotate(45deg) translate(4px, 4px);
+    opacity: 0.3;
+  }
+}
+
+/* ── INTRO LABEL ── */
+#intro-label {
+  position: absolute;
+  top: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 30;
+  pointer-events: none;
+}
+#intro-label h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: clamp(18px, 3vw, 32px);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: rgba(242, 234, 216, 0.5);
+}
+#intro-label span {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(11px, 1.4vw, 15px);
+  letter-spacing: 3px;
+  color: rgba(196, 98, 45, 0.7);
+  display: block;
+  margin-top: 6px;
+}
+
+/* ══════════════════════════════════
+   SCENE 2 — MAP + MOTION PATH
+══════════════════════════════════ */
+#map-scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#map-svg-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── MAP TITLE ── */
+#map-title {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 40;
+  opacity: 0;
+  white-space: nowrap;
+}
+#map-title h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: clamp(22px, 3.5vw, 42px);
+  letter-spacing: 6px;
+  color: var(--white);
+}
+#map-title h2 em {
+  font-style: italic;
+  color: var(--mosaic-gold);
+}
+#map-title p {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-top: 6px;
+}
+
+/* ── METRO ON PATH (small wagon) ── */
+#path-wagon {
+  position: absolute;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0;
+  transform-origin: 50% 80%;
+}
+#path-wagon svg {
+  width: 80px;
+  filter: drop-shadow(0 4px 12px rgba(196, 98, 45, 0.5));
+}
+
+/* ── STATION DOTS & LABELS ── */
+.st-dot {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  border: 3px solid var(--white);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 55;
+  opacity: 0;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s;
+}
+.st-dot:hover {
+  transform: translate(-50%, -50%) scale(1.5);
+  box-shadow: 0 0 0 6px rgba(196, 98, 45, 0.3);
+}
+.st-dot.active {
+  background: var(--mosaic-gold);
+  border-color: var(--night);
+}
+
+.st-label {
+  position: absolute;
+  z-index: 54;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.st-label-inner {
+  background: rgba(12, 15, 20, 0.88);
+  border: 1px solid rgba(196, 98, 45, 0.5);
+  padding: 8px 14px;
+  backdrop-filter: blur(8px);
+}
+.st-label h4 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--mosaic-gold);
+  margin-bottom: 2px;
+}
+.st-label p {
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(242, 234, 216, 0.5);
+}
+
+/* ── STATION COUNTER ── */
+#station-counter {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 56;
+  opacity: 0;
+}
+.counter-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(242, 234, 216, 0.2);
+  border: 1px solid rgba(242, 234, 216, 0.3);
+  transition:
+    background 0.3s,
+    transform 0.3s;
+}
+.counter-dot.on {
+  background: var(--terracotta);
+  transform: scale(1.4);
+}
+
+/* ══════════════════════════════════
+   STATION DETAIL OVERLAY
+══════════════════════════════════ */
+#detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--night);
+  z-index: 200;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+  overflow: hidden;
+}
+#detail-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Left panel */
+.detail-left {
+  padding: 60px 48px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid rgba(242, 234, 216, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.detail-left::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 30% 70%,
+    rgba(196, 98, 45, 0.07) 0%,
+    transparent 70%
+  );
+}
+
+.detail-tag {
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 20px;
+}
+.detail-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.detail-year {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--mosaic-gold);
+  margin-bottom: 32px;
+}
+.detail-desc {
+  font-size: 13px;
+  line-height: 1.95;
+  color: rgba(242, 234, 216, 0.65);
+  max-width: 420px;
+  margin-bottom: 40px;
+}
+.detail-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(242, 234, 216, 0.08);
+}
+.fact-label {
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--mosaic-gold);
+  margin-bottom: 5px;
+}
+.fact-val {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  color: var(--white);
+}
+
+/* Right panel — mosaic visual */
+.detail-right {
+  position: relative;
+  overflow: hidden;
+  background: var(--night2);
+}
+.mosaic-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+}
+.mosaic-cell {
+  border-radius: 2px;
+  transition: opacity 0.3s;
+}
+.detail-right-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 2;
+}
+.monument-icon {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 120px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(242, 234, 216, 0.06);
+  line-height: 1;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+}
+
+/* Close + nav */
+.detail-nav {
+  position: absolute;
+  top: 28px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+}
+.detail-close {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(242, 234, 216, 0.35);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: "DM Mono", monospace;
+  transition: color 0.2s;
+}
+.detail-close:hover {
+  color: var(--terracotta);
+}
+.detail-nav-arrows button {
+  background: none;
+  border: 1px solid rgba(242, 234, 216, 0.15);
+  color: var(--white);
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 14px;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+.detail-nav-arrows button:hover {
+  border-color: var(--terracotta);
+  background: rgba(196, 98, 45, 0.1);
+}
+
+/* Gaudi ornamental border */
+.ornament {
+  position: absolute;
+  pointer-events: none;
+}
+.ornament-tl {
+  top: 16px;
+  left: 16px;
+}
+.ornament-br {
+  bottom: 16px;
+  right: 16px;
+  transform: rotate(180deg);
+}
+
+/* ── PROGRESS LINE ── */
+#progress-line {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 0%;
+  background: linear-gradient(180deg, var(--terracotta), var(--mosaic-gold));
+  z-index: 9000;
+  transition: height 0.1s;
+}
+
+/* ── GAUDI TILE PATTERN BG for map ── */
+.tile-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(196, 98, 45, 0.04) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(26, 63, 143, 0.04) 0%,
+      transparent 50%
+    );
+}

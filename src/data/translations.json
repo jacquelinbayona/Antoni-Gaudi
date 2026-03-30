@@ -1,0 +1,42 @@
+{
+  "fr": {
+    "title": "Ruta Gaudí",
+    "scroll": "Scrollez pour embarquer",
+    "stations": {
+      "sagrada familia": "Sagrada Família",
+      "casa batllo": "Casa Batlló",
+      "la pedrera": "La Pedrera",
+      "parc guell": "Parc Güell"
+    }
+  },
+  "es": {
+    "title": "Ruta Gaudí",
+    "scroll": "Desliza para empezar",
+    "stations": {
+      "sagrada familia": "Sagrada Família",
+      "casa batllo": "Casa Batlló",
+      "la pedrera": "La Pedrera",
+      "parc guell": "Parc Güell"
+    }
+  },
+  "en": {
+    "title": "Gaudí Route",
+    "scroll": "Scroll to begin",
+    "stations": {
+      "sagrada familia": "Sagrada Família",
+      "casa batllo": "Casa Batlló",
+      "la pedrera": "La Pedrera",
+      "parc guell": "Parc Güell"
+    }
+  },
+  "ca": {
+    "title": "Ruta Gaudí",
+    "scroll": "Desplaça per començar",
+    "stations": {
+      "sagrada familia": "Sagrada Família",
+      "casa batllo": "Casa Batlló",
+      "la pedrera": "La Pedrera",
+      "parc guell": "Parc Güell"
+    }
+  }
+}
