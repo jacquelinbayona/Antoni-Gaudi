@@ -1,3 +1,4 @@
+fetch("/data/translation.json");
 /* langues */
 let currentLang = localStorage.getItem("lang") || "fr";
 let translations = {};

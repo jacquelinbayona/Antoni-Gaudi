@@ -1,9 +1,27 @@
-/* tunnel, map, scroll animation */
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap");
-* {
-  box-sizing: border-box;
+
+/* ══════════════════════════════════
+   VARIABLES & RESET
+══════════════════════════════════ */
+:root {
+  --white: #f2f0ef;
+  --terracotta: #c4622d;
+  --red: #ff2c2c;
+  --mosaic-blue: #005cbd;
+  --mosaic-gold: #ffde21;
+  --night: #0c0f14;
+  --night2: #141820;
+  --gaudi-green: #50c878;
+  --stone: #8a8070;
+  --wagon-grey: #b8c4d0;
+}
+
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 a {
@@ -14,13 +32,7 @@ img,
 video {
   display: block;
 }
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
 html {
   scroll-behavior: auto;
 }
@@ -42,6 +54,30 @@ body::after {
   opacity: 0.035;
   pointer-events: none;
   z-index: 9998;
+}
+
+/* ══════════════════════════════════
+   COMPONENTS — CURSOR
+══════════════════════════════════ */
+#cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: var(--terracotta);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.2s,
+    height 0.2s,
+    background 0.2s;
+  mix-blend-mode: difference;
+}
+#cursor.hovered {
+  width: 32px;
+  height: 32px;
+  background: var(--mosaic-gold);
 }
 
 /* ══════════════════════════════════
@@ -83,7 +119,6 @@ body::after {
   position: relative;
   z-index: 20;
   transform-origin: center center;
-  /* starts small, zooms in via GSAP */
 }
 
 #wagon-svg {
@@ -92,7 +127,7 @@ body::after {
     drop-shadow(0 0 40px rgba(196, 98, 45, 0.15));
 }
 
-/* Rails */
+/* ── RAILS ── */
 #rails {
   position: absolute;
   bottom: -28px;
@@ -456,7 +491,7 @@ body::after {
   right: 40px;
 }
 
-/* Close + nav */
+/* ── Close + nav ── */
 .detail-nav {
   position: absolute;
   top: 28px;
@@ -497,7 +532,7 @@ body::after {
   background: rgba(196, 98, 45, 0.1);
 }
 
-/* Gaudi ornamental border */
+/* ── Ornamental corners ── */
 .ornament {
   position: absolute;
   pointer-events: none;
@@ -512,7 +547,9 @@ body::after {
   transform: rotate(180deg);
 }
 
-/* ── PROGRESS LINE ── */
+/* ══════════════════════════════════
+   PROGRESS LINE
+══════════════════════════════════ */
 #progress-line {
   position: fixed;
   left: 0;
@@ -524,7 +561,9 @@ body::after {
   transition: height 0.1s;
 }
 
-/* ── GAUDI TILE PATTERN BG for map ── */
+/* ══════════════════════════════════
+   GAUDI TILE PATTERN BG
+══════════════════════════════════ */
 .tile-bg {
   position: absolute;
   inset: 0;
