@@ -42,6 +42,49 @@ body {
   cursor: none;
 }
 
+/* ── LANGUAGE SWITCH (trencadís buttons) ── */
+#lang-switch {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  gap: 10px;
+  z-index: 10010;
+}
+.trencadis-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(2, 6, 23, 0.6);
+  background-size: 60% 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.trencadis-btn[data-lang="en"] {
+  background: linear-gradient(135deg, #005cbd 0%, #2a7ee6 100%);
+}
+.trencadis-btn[data-lang="fr"] {
+  background: linear-gradient(135deg, #3a6b4a 0%, #66b37a 100%);
+}
+.trencadis-btn[data-lang="es"] {
+  background: linear-gradient(135deg, #c4622d 0%, #ff8a4a 100%);
+}
+.trencadis-btn[data-lang="ca"] {
+  background: linear-gradient(135deg, #ffde21 0%, #ffd64d 100%);
+}
+.trencadis-btn:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.12);
+}
+.trencadis-btn.active {
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.6),
+    0 0 8px rgba(255, 222, 33, 0.06);
+  transform: translateY(-2px);
+}
+
 /* ── MOSAIC GRAIN OVERLAY ── */
 body::after {
   content: "";
@@ -301,17 +344,20 @@ body::after {
   margin-top: 6px;
 }
 
-/* ── METRO ON PATH (small wagon) ── */
+/* ── DOT ON PATH ── */
 #path-wagon {
   position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--white);
   pointer-events: none;
   z-index: 50;
   opacity: 0;
-  transform-origin: 50% 80%;
-}
-#path-wagon svg {
-  width: 80px;
-  filter: drop-shadow(0 4px 12px rgba(196, 98, 45, 0.5));
+  transform-origin: 50% 50%;
+  box-shadow:
+    0 0 14px rgba(255, 255, 255, 0.7),
+    0 0 36px rgba(255, 255, 255, 0.28);
 }
 
 /* ── STATION DOTS & LABELS ── */
