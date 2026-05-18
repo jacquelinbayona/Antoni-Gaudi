@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 @import url("https://use.typekit.net/sry8rql.css");
+
+@font-face {
+  font-family: "Eckmania";
+  src: url("../assets/fonts/00EckmaniaDisplayNon-Commercial-Regular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 :root {
   --white: #f2f0ef;
   --terracotta: #c4622d;
@@ -40,6 +49,21 @@ body {
   font-family: "DM Mono", monospace;
   overflow-x: hidden;
   cursor: none;
+}
+
+/* ── HOMEPAGE CREDIT ── */
+#homepage-credit {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 10000;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffc552;
+  pointer-events: none;
+  opacity: 0.6;
 }
 
 /* ── LANGUAGE SWITCH (trencadís buttons) ── */
@@ -263,6 +287,10 @@ body::after {
   top: 42px;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 28px;
   text-align: center;
   z-index: 30;
   pointer-events: none;
@@ -270,27 +298,25 @@ body::after {
 #intro-label h1 {
   margin: 0;
   line-height: 1;
+  font-size: 128px;
+  text-transform: uppercase;
 }
 
 /* GAUDÍ — large, white, Plus Jakarta Sans */
 #intro-label h1:first-child {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
-  font-size: 128px;
+  font-style: italic;
   letter-spacing: 2px;
-  text-transform: uppercase;
   color: var(--white);
 }
 
 /* EXPERIENCE — Eckmania, yellow */
 #intro-label h1:last-child {
-  font-family: "00EckmaniaDisplayNon-Commercial", serif;
+  font-family: "Eckmania", serif;
   font-weight: 400;
-  font-size: 48px;
   letter-spacing: 6px;
-  text-transform: uppercase;
   color: var(--mosaic-gold);
-  margin-top: -8px;
 }
 
 #intro-label span {

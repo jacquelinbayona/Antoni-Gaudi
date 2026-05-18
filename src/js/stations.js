@@ -61,7 +61,7 @@ const STATIONS = [
     ],
   },
   {
-    tag: "Station 04 · Passeig de Gràcia",
+    tag: "Station 02 · Passeig de Garcia",
     title: "La Pedrera",
     year: "1906 — 1912",
     desc: " Aussi appelée Casa Milà, cette résidence privée est célèbre pour sa façade de pierre ondulante et ses balcons en fer forgé qui ressemblent à des algues marines. Le toit-terrasse, avec ses cheminées sculpturales surnommées 'les guerriers', offre une vue imprenable sur la ville. La Pedrera incarne la vision de Gaudí d'une architecture vivante, où chaque élément est à la fois fonctionnel et artistique.",
