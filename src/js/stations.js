@@ -2,7 +2,7 @@
 const STATIONS = [
   {
     tag: "Station 01 · Eixample",
-    title: "Sagrada Família",
+    title: "La Sagrada Família",
     year: "1882 — en cours",
     desc: "Chef-d'œuvre absolu de Gaudí, cette basilique catholique mêle gothique et Art nouveau de manière entièrement organique. Ses façades racontent la vie du Christ en pierre sculptée. L'intérieur, éclairé par des milliers de vitraux colorés, crée une forêt de lumière kaléidoscopique qui change selon les heures. Inachevée à la mort de Gaudí en 1926, la construction se poursuit encore aujourd'hui.",
     archi: "Antoni Gaudí",
