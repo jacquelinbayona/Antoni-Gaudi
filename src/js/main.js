@@ -231,7 +231,6 @@ style.textContent = `
   @keyframes spin { to { transform: rotate(360deg); } }
 `;
 document.head.appendChild(style);
-
 // Langue active et texte actif
 let langueActive = "fr";
 let texteActif = "pedrera";
@@ -242,33 +241,7 @@ function jouerVoix() {
 }
 
 // Changer la langue
-// Changer la langue — lie les boutons de #lang-switch (classe .trencadis-btn)
-document.querySelectorAll("#lang-switch .trencadis-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const lang = btn.dataset.lang;
-    if (!lang) return;
-    // mettre à jour la langue active (utilisée pour l'audio)
-    langueActive = lang;
-    // mettre à jour le texte actif si fourni (ex: data-text="pedrera")
-    if (btn.dataset.text) {
-      texteActif = btn.dataset.text;
-    }
-    // si i18n.js expose setLanguage, on l'appelle pour changer les textes
-    if (typeof setLanguage === "function") {
-      try {
-        setLanguage(lang);
-      } catch (e) {
-        /* ignore */
-      }
-    }
-    // mettre à jour l'UI de langue si disponible
-    if (typeof updateLangUI === "function") {
-      try {
-        updateLangUI();
-      } catch (e) {
-        /* ignore */
-      }
-    }
-    jouerVoix();
-  });
+document.getElementById("btn-fr").addEventListener("click", () => {
+  langueActive = "fr";
+  jouerVoix();
 });
