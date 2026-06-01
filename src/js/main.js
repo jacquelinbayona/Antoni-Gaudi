@@ -231,3 +231,17 @@ style.textContent = `
   @keyframes spin { to { transform: rotate(360deg); } }
 `;
 document.head.appendChild(style);
+// Langue active et texte actif
+let langueActive = "fr";
+let texteActif = "pedrera";
+
+function jouerVoix() {
+  const audio = new Audio(`audio/${texteActif}-${langueActive}.mp3`);
+  audio.play();
+}
+
+// Changer la langue
+document.getElementById("btn-fr").addEventListener("click", () => {
+  langueActive = "fr";
+  jouerVoix();
+});
