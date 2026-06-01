@@ -1,25 +1,195 @@
 /* layout pages individuelles, hero section, galerie */
 
 /* ══════════════════════════════════
+   BUILDING PAGE STRUCTURE - BASE
+═══════════════════════════════════ */
+
+.building-page {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 80px;
+  padding: 80px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 40px;
+  padding: 120px 0;
+  min-height: 60vh;
+}
+
+.hero-illustration {
+  width: 300px;
+  height: auto;
+  max-width: 80vw;
+}
+
+.hero h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: 2px;
+}
+
+.hero p {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mosaic-gold);
+}
+
+/* Building Content Grid */
+.building-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.building-info {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.building-info h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.5rem;
+  color: var(--white);
+  font-weight: 300;
+}
+
+.year-status {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mosaic-gold);
+}
+
+.intro-text {
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(242, 234, 216, 0.7);
+}
+
+/* Detail Sections */
+.detail-section {
+  border-top: 1px solid rgba(242, 234, 216, 0.1);
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.detail-section h3 {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--mosaic-gold);
+  margin-bottom: 16px;
+}
+
+.detail-section p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: rgba(242, 234, 216, 0.65);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(242, 234, 216, 0.1);
+}
+
+.stats-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+
+.stats-item h4 {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mosaic-gold);
+}
+
+.stats-item p {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 24px;
+  color: var(--white);
+}
+
+/* Building Image */
+.building-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.building-image img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .building-content {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .building-page {
+    padding: 40px 20px;
+    gap: 60px;
+  }
+
+  .hero {
+    padding: 60px 0;
+    min-height: auto;
+  }
+
+  .hero-illustration {
+    width: 200px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ══════════════════════════════════
    STATION DETAIL OVERLAY
 ══════════════════════════════════ */
 #detail-overlay {
   position: fixed;
   inset: 0;
   background: var(--night);
+  overflow-y: auto;
   z-index: 200;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s;
-  overflow: hidden;
 }
-#detail-overlay.open {
-  opacity: 1;
-  pointer-events: all;
+.detail-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 120px 60px;
 }
-
 /* Left panel */
 .detail-left {
   padding: 60px 48px 48px;
@@ -50,11 +220,12 @@
 }
 .detail-title {
   font-family: "Cormorant Garamond", serif;
+  text-align: center;
   font-weight: 300;
-  font-size: clamp(32px, 5vw, 64px);
-  line-height: 1.05;
-  color: var(--white);
-  margin-bottom: 10px;
+  font-size: clamp(5rem, 10vw, 10rem);
+}
+.detail-section {
+  margin-top: 80px;
 }
 .detail-year {
   font-size: 11px;
@@ -88,43 +259,10 @@
   font-size: 18px;
   color: var(--white);
 }
-
-/* Right panel — mosaic visual */
-.detail-right {
-  position: relative;
-  overflow: hidden;
-  background: var(--night2);
-}
-.mosaic-grid {
-  position: absolute;
-  inset: 0;
+.stats-grid {
   display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
-.mosaic-cell {
-  border-radius: 2px;
-  transition: opacity 0.3s;
-}
-.detail-right-content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  z-index: 2;
-}
-.monument-icon {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 120px;
-  font-weight: 300;
-  font-style: italic;
-  color: rgba(242, 234, 216, 0.06);
-  line-height: 1;
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-}
-
 /* Close + nav */
 .detail-nav {
   position: absolute;
@@ -148,37 +286,6 @@
 }
 .detail-close:hover {
   color: var(--terracotta);
-}
-.detail-nav-arrows button {
-  background: none;
-  border: 1px solid rgba(242, 234, 216, 0.15);
-  color: var(--white);
-  width: 34px;
-  height: 34px;
-  cursor: pointer;
-  font-size: 14px;
-  transition:
-    border-color 0.2s,
-    background 0.2s;
-}
-.detail-nav-arrows button:hover {
-  border-color: var(--terracotta);
-  background: rgba(196, 98, 45, 0.1);
-}
-
-/* Gaudi ornamental border */
-.ornament {
-  position: absolute;
-  pointer-events: none;
-}
-.ornament-tl {
-  top: 16px;
-  left: 16px;
-}
-.ornament-br {
-  bottom: 16px;
-  right: 16px;
-  transform: rotate(180deg);
 }
 
 /* ── PROGRESS LINE ── */
@@ -208,4 +315,144 @@
       rgba(26, 63, 143, 0.04) 0%,
       transparent 50%
     );
+}
+
+/* ══════════════════════════════════
+   PAGE-LEVEL OVERLAY (Building pages)
+═══════════════════════════════════ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.98);
+  overflow-y: auto;
+  z-index: 999;
+  padding: 80px 60px;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.hidden {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.overlay-content h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  color: var(--white);
+  text-align: center;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
+
+.overlay-content .intro {
+  font-size: 13px;
+  line-height: 1.95;
+  color: rgba(242, 234, 216, 0.65);
+  text-align: center;
+  margin-bottom: 60px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.overlay-content section {
+  margin-bottom: 60px;
+}
+
+.overlay-content section h3 {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--mosaic-gold);
+  margin-bottom: 20px;
+}
+
+.overlay-content section p {
+  font-size: 12px;
+  line-height: 1.95;
+  color: rgba(242, 234, 216, 0.65);
+}
+
+.overlay .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 80px;
+  padding-top: 60px;
+  border-top: 1px solid rgba(242, 234, 216, 0.1);
+}
+
+.overlay .stats-item1,
+.overlay .stats-item2,
+.overlay .stats-item3,
+.overlay .stats-item4,
+.overlay .stats-item5 {
+  text-align: center;
+}
+
+.overlay .stats-item1 h4,
+.overlay .stats-item2 h4,
+.overlay .stats-item3 h4,
+.overlay .stats-item4 h4,
+.overlay .stats-item5 h4 {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mosaic-gold);
+  margin-bottom: 12px;
+}
+
+.overlay .stats-item1 p,
+.overlay .stats-item2 p,
+.overlay .stats-item3 p,
+.overlay .stats-item4 p,
+.overlay .stats-item5 p {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  color: var(--white);
+}
+
+.close-overlay {
+  position: fixed;
+  top: 30px;
+  right: 40px;
+  font-size: 32px;
+  background: none;
+  border: none;
+  color: rgba(242, 234, 216, 0.5);
+  cursor: pointer;
+  z-index: 1000;
+  transition: color 0.2s;
+}
+
+.close-overlay:hover {
+  color: var(--terracotta);
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    padding: 60px 20px;
+  }
+
+  .overlay-content h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .overlay .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .close-overlay {
+    top: 20px;
+    right: 20px;
+    font-size: 28px;
+  }
 }
