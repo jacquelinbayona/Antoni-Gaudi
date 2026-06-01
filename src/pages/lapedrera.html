@@ -8,11 +8,194 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <!-- JS -->
+    <script src="../js/i18n.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/cursor.js"></script>
+    <script src="../js/stations.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="../css/reset.css" />
-    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
     <link rel="stylesheet" href="../css/components.css" />
-    <link rel="stylesheet" href="./css/main.css" />
-    <link rel="stylesheet" href="../css/pages/building.css" />
+    <link rel="stylesheet" href="../css/pages/buildings.css" />
   </head>
+  <body data-station="3">
+    <!-- Background mosaico -->
+    <div class="background-pattern"></div>
+
+    <!-- Header -->
+    <header class="building-header">
+      <a class="back-btn" href="../index.html">← Retour</a>
+      <h2>STATION 04 · BARCELONA</h2>
+    </header>
+
+    <!-- Botones laterales -->
+    <aside class="floating-actions">
+      <button class="audio-btn" aria-label="Audio guide">🔊</button>
+      <button id="openOverlay" aria-label="Voir plus">ℹ️</button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="building-page">
+      <!-- Hero Section -->
+      <section class="hero">
+        <img
+          src="../assets/lapedrera.svg"
+          class="hero-illustration"
+          alt="La Pedrera"
+        />
+        <h1>LA PEDRERA</h1>
+        <p>1906 — 1912</p>
+      </section>
+
+      <!-- Building Info Section -->
+      <section class="building-content">
+        <div class="building-info">
+          <h2>La Pedrera (Casa Milà)</h2>
+
+          <p>
+            Aussi appelée Casa Milà, cette résidence privée est célèbre pour sa
+            façade de pierre ondulante et ses balcons en fer forgé qui
+            ressemblent à des algues marines. Le toit-terrasse, avec ses
+            cheminées sculpturales surnommées 'les guerriers', offre une vue
+            imprenable sur la ville. La Pedrera incarne la vision de Gaudí d'une
+            architecture vivante, où chaque élément est à la fois fonctionnel et
+            artistique.
+          </p>
+
+          <!-- Facts Grid -->
+          <div class="facts-grid">
+            <section class="facts">
+              <h3>Hauteur</h3>
+              <p>47 m</p>
+            </section>
+
+            <section class="facts">
+              <h3>Style</h3>
+              <p>Art nouveau · Modernisme</p>
+            </section>
+
+            <section class="facts">
+              <h3>Classement</h3>
+              <p>UNESCO 1984</p>
+            </section>
+          </div>
+
+          <!-- Building Image -->
+          <div class="building-image">
+            <img src="../assets/lapedrera.svg" alt="La Pedrera building" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- OVERLAY with Extended Content -->
+    <div class="overlay hidden">
+      <button class="close-overlay">×</button>
+
+      <div class="overlay-content">
+        <h1>LA PEDRERA</h1>
+
+        <p class="intro">
+          Son nom signifie 'la carrière' : la façade ressemble à une montagne
+          brute. Gaudí lui-même disait que cet immeuble était son maître-œuvre,
+          bien que ses propriétaires, les Milà, le trouvaient extravagant.
+        </p>
+
+        <section>
+          <h3>LA FAÇADE ONDULANTE</h3>
+          <p>
+            Aucune ligne droite. La façade s'ondule comme l'eau figée. Ses
+            balcons en fer forgé semblent se détacher du bâtiment, formant des
+            vagues de métal. Chaque balcon est unique. Gaudí refusait la
+            répétition mécanique : l'architecture devait respirer avec le
+            paysage.
+          </p>
+        </section>
+
+        <section>
+          <h3>LES CHEMINÉES 'GUERRIERS'</h3>
+          <p>
+            Sur le toit-terrasse, les cheminées ne sont pas des tubes
+            rectilignes : ce sont des sculptures. Casquées, géantes, elles
+            ressemblent à des guerriers ou à des sentinelles gardant la ville.
+            Elles sont en céramique colorée et recouvertes de mosaïques. Monter
+            au toit de La Pedrera, c'est entrer dans une armée de pierre.
+          </p>
+        </section>
+
+        <section>
+          <h3>L'INTÉRIEUR FLUIDE</h3>
+          <p>
+            À l'intérieur, tout épouse la forme du bâtiment. Les murs ne sont
+            jamais perpendiculaires aux sols. Les escaliers bougent. Les portes
+            d'entrée aux appartements sont ovales, non rectangulaires. Gaudí
+            voulait que ses habitants vivent à l'intérieur de la nature, pas
+            d'une boîte géométrique.
+          </p>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="stats-grid">
+          <div class="stats-item1">
+            <h4>HAUTEUR</h4>
+            <p>47 m</p>
+          </div>
+
+          <div class="stats-item2">
+            <h4>CLASSEMENT UNESCO</h4>
+            <p>1984</p>
+          </div>
+
+          <div class="stats-item3">
+            <h4>APPARTEMENTS</h4>
+            <p>33</p>
+          </div>
+
+          <div class="stats-item4">
+            <h4>CONSTRUCTION</h4>
+            <p>1906-1912</p>
+          </div>
+
+          <div class="stats-item5">
+            <h4>SURFACE</h4>
+            <p>11.000 m²</p>
+          </div>
+
+          <div class="stats-item5">
+            <h4>ARCHITECTE</h4>
+            <p>Antoni Gaudí</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Script to handle overlay -->
+    <script>
+      const overlay = document.querySelector(".overlay");
+      const openBtn = document.getElementById("openOverlay");
+      const closeBtn = document.querySelector(".close-overlay");
+
+      openBtn.addEventListener("click", () => {
+        overlay.classList.remove("hidden");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        overlay.classList.add("hidden");
+      });
+
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+          overlay.classList.add("hidden");
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          overlay.classList.add("hidden");
+        }
+      });
+    </script>
+  </body>
 </html>

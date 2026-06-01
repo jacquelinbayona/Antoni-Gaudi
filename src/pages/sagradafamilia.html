@@ -8,12 +8,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <!-- JS -->
+    <script src="../js/i18n.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/cursor.js"></script>
+    <script src="../js/stations.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="../css/reset.css" />
-    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
     <link rel="stylesheet" href="../css/components.css" />
-    <link rel="stylesheet" href="./css/main.css" />
-    <link rel="stylesheet" href="../css/pages/building.css" />
+    <link rel="stylesheet" href="../css/pages/buildings.css" />
   </head>
   <body data-station="0">
     <!-- Background mosaico -->
@@ -21,65 +26,74 @@
 
     <!-- Header -->
     <header class="building-header">
-      <a class="back-btn"> ... </a>
-
+      <a class="back-btn" href="../index.html">← Retour</a>
       <h2>STATION 01 · BARCELONA</h2>
     </header>
 
     <!-- Botones laterales -->
     <aside class="floating-actions">
-      <button class="audio-btn">...</button>
-
-      <button id="openOverlay">...</button>
+      <button class="audio-btn" aria-label="Audio guide">🔊</button>
+      <button id="openOverlay" aria-label="Voir plus">ℹ️</button>
     </aside>
 
-    <!-- Hero -->
+    <!-- Main Content -->
     <main class="building-page">
+      <!-- Hero Section -->
       <section class="hero">
-        <img src="../assets/sagradafamilia.svg" class="hero-illustration" />
-
+        <img
+          src="../assets/sagradafamilia.svg"
+          class="hero-illustration"
+          alt="Sagrada Familia"
+        />
         <h1>LA SAGRADA FAMILIA</h1>
-
         <p>1882 — EN COURS</p>
       </section>
 
+      <!-- Building Info Section -->
       <section class="building-content">
-        < class="building-info">
-        <h2>Sagrada Família</h2>
+        <div class="building-info">
+          <h2>Sagrada Família</h2>
 
-        <p>
-          Chef-d'œuvre absolu de Gaudí, cette basilique catholique mêle gothique
-          et Art nouveau de manière entièrement organique. Ses façades racontent
-          la vie du Christ en pierre sculptée. L'intérieur, éclairé par des
-          milliers de vitraux colorés, crée une forêt de lumière kaléidoscopique
-          qui change selon les heures. Inachevée à la mort de Gaudí en 1926, la
-          construction se poursuit encore aujourd'hui.
-        </p>
+          <p>
+            Chef-d'œuvre absolu de Gaudí, cette basilique catholique mêle
+            gothique et Art nouveau de manière entièrement organique. Ses
+            façades racontent la vie du Christ en pierre sculptée. L'intérieur,
+            éclairé par des milliers de vitraux colorés, crée une forêt de
+            lumière kaléidoscopique qui change selon les heures. Inachevée à la
+            mort de Gaudí en 1926, la construction se poursuit encore
+            aujourd'hui.
+          </p>
 
-        <div class="facts-grid">
-          <section class="facts">
-            <h3>Hauteur</h3>
-            <p>172 m (prévu)</p>
-          </section>
+          <!-- Facts Grid -->
+          <div class="facts-grid">
+            <section class="facts">
+              <h3>Hauteur</h3>
+              <p>172 m (prévu)</p>
+            </section>
 
-          <section class="facts">
-            <h3>Style</h3>
-            <p>Modernisme catalan</p>
-          </section>
+            <section class="facts">
+              <h3>Style</h3>
+              <p>Modernisme catalan</p>
+            </section>
 
-          <section class="facts">
-            <h3>Classement</h3>
-            <p>UNESCO 2005</p>
-          </section>
-        </div>
+            <section class="facts">
+              <h3>Classement</h3>
+              <p>UNESCO 2005</p>
+            </section>
+          </div>
 
-        <div class="building-image">
-          <img src="../assets/sagradafamilia.svg" />
+          <!-- Building Image -->
+          <div class="building-image">
+            <img
+              src="../assets/sagradafamilia.svg"
+              alt="Sagrada Familia building"
+            />
+          </div>
         </div>
       </section>
     </main>
 
-    <!-- OVERLAY -->
+    <!-- OVERLAY with Extended Content -->
     <div class="overlay hidden">
       <button class="close-overlay">×</button>
 
@@ -87,7 +101,7 @@
         <h1>LA SAGRADA FAMILIA</h1>
 
         <p class="intro">
-          Bienvenue devant ce qui est sans doute le chantier le plus long de
+          Bienvenue devant ce qui est sans doute le chantier le plus long de
           l'histoire de l'architecture. Devant vous s'élève la Sagrada Família,
           commencée en 1882, toujours inachevée, et pourtant déjà considérée
           comme un chef-d'œuvre universel. Levez les yeux : ces tours organiques
@@ -99,7 +113,7 @@
           <p>
             Gaudí reprend la construction en 1883 et la transforme radicalement.
             Il abandonne le néogothique initial pour inventer son propre langage
-            : des colonnes en forme d'arbres qui se ramifient vers le plafond,
+            : des colonnes en forme d'arbres qui se ramifient vers le plafond,
             des surfaces hyperboloïdes, des paraboloïdes qui n'existaient pas
             encore en architecture. L'intérieur ressemble à une forêt de pierre
             baignée de lumière colorée une vision que Gaudí n'a jamais cessé
@@ -110,40 +124,41 @@
         <section>
           <h3>LA LUMIÈRE & LES VITRAUX</h3>
           <p>
-            En entrant, vous serez submergé par une lumière kaléidoscopique.
-            Les vitraux conçus par Joan Vila-Grau filtrent la lumière
-            différemment selon l'heure : verts et bleus le matin à l'est,
-            oranges et rouges le soir à l'ouest. C'est une cathédrale vivante
-            qui change d'âme au fil du jour. Gaudí avait tout calculé :
-            l'orientation des ouvertures, l'angle des colonnes, la hauteur des
-            nefs — tout sert la lumière.
+            En entrant, vous serez submergé par une lumière kaléidoscopique. Les
+            vitraux conçus par Joan Vila-Grau filtrent la lumière différemment
+            selon l'heure : verts et bleus le matin à l'est, oranges et rouges
+            le soir à l'ouest. C'est une cathédrale vivante qui change d'âme au
+            fil du jour. Gaudí avait tout calculé : l'orientation des
+            ouvertures, l'angle des colonnes, la hauteur des nefs — tout sert la
+            lumière.
           </p>
         </section>
 
         <section>
           <h3>L'ANECDOTE</h3>
           <p>
-            Gaudí savait qu'il ne verrait jamais son œuvre achevée. Il disait
-            : « Mon client n'est pas pressé »  en parlant de Dieu. Renversé par
-            un tramway en 1926, il fut d'abord pris pour un mendiant tant ses
+            Gaudí savait qu'il ne verrait jamais son œuvre achevée. Il disait :
+            « Mon client n'est pas pressé » en parlant de Dieu. Renversé par un
+            tramway en 1926, il fut d'abord pris pour un mendiant tant ses
             vêtements étaient usés. Barcelona pleurait son plus grand génie.
           </p>
         </section>
 
+        <!-- Stats Grid -->
         <section class="stats-grid">
           <div class="stats-item1">
             <h4>HAUTEUR PRÉVUE</h4>
-            <p>172 m (prévu)</p>
+            <p>172 m</p>
           </div>
 
           <div class="stats-item2">
-            <h4>FAÇADES</h4>
-            <p>3</p>
+            <h4>CLASSEMENT UNESCO</h4>
+            <p>2005</p>
           </div>
 
           <div class="stats-item3">
-            <h4>CLASSEMENT UNESCO</h4>
-            <p>2005</p>
+            <h4>VISITEURS / AN</h4>
+            <p>4.5 M</p>
           </div>
 
           <div class="stats-item4">
@@ -152,8 +167,8 @@
           </div>
 
           <div class="stats-item5">
-            <h4>VISITEURS / AN</h4>
-            <p>4.5 M</p>
+            <h4>FAÇADES</h4>
+            <p>3</p>
           </div>
 
           <div class="stats-item5">
@@ -163,5 +178,32 @@
         </section>
       </div>
     </div>
+
+    <!-- Script to handle overlay -->
+    <script>
+      const overlay = document.querySelector(".overlay");
+      const openBtn = document.getElementById("openOverlay");
+      const closeBtn = document.querySelector(".close-overlay");
+
+      openBtn.addEventListener("click", () => {
+        overlay.classList.remove("hidden");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        overlay.classList.add("hidden");
+      });
+
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+          overlay.classList.add("hidden");
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          overlay.classList.add("hidden");
+        }
+      });
+    </script>
   </body>
 </html>

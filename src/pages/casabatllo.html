@@ -16,9 +16,186 @@
     <script src="../js/stations.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="../css/reset.css" />
-    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
     <link rel="stylesheet" href="../css/components.css" />
-    <link rel="stylesheet" href="./css/main.css" />
-    <link rel="stylesheet" href="../css/pages/building.css" />
+    <link rel="stylesheet" href="../css/pages/buildings.css" />
   </head>
+  <body data-station="1">
+    <!-- Background mosaico -->
+    <div class="background-pattern"></div>
+
+    <!-- Header -->
+    <header class="building-header">
+      <a class="back-btn" href="../index.html">← Retour</a>
+      <h2>STATION 02 · BARCELONA</h2>
+    </header>
+
+    <!-- Botones laterales -->
+    <aside class="floating-actions">
+      <button class="audio-btn" aria-label="Audio guide">🔊</button>
+      <button id="openOverlay" aria-label="Voir plus">ℹ️</button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="building-page">
+      <!-- Hero Section -->
+      <section class="hero">
+        <img
+          src="../assets/casabatllo.svg"
+          class="hero-illustration"
+          alt="Casa Batlló"
+        />
+        <h1>CASA BATLLÓ</h1>
+        <p>1904 — 1906</p>
+      </section>
+
+      <!-- Building Info Section -->
+      <section class="building-content">
+        <div class="building-info">
+          <h2>Casa Batlló</h2>
+
+          <p>
+            Rénovation radicale d'un immeuble bourgeois, la Casa Batlló est une
+            ode à la mer, aux dragons et aux os humains. Sa façade recouverte de
+            mosaïques de verre irisées évoque des écailles de lézard sous la
+            lumière catalane. Son toit ondulé en forme de dos de dragon défie
+            toute convention. Gaudí a conçu chaque détail, des poignées de
+            portes aux rampes d'escalier.
+          </p>
+
+          <!-- Facts Grid -->
+          <div class="facts-grid">
+            <section class="facts">
+              <h3>Hauteur</h3>
+              <p>32 m</p>
+            </section>
+
+            <section class="facts">
+              <h3>Style</h3>
+              <p>Art nouveau · Modernisme</p>
+            </section>
+
+            <section class="facts">
+              <h3>Classement</h3>
+              <p>UNESCO 2005</p>
+            </section>
+          </div>
+
+          <!-- Building Image -->
+          <div class="building-image">
+            <img src="../assets/casabatllo.svg" alt="Casa Batlló building" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- OVERLAY with Extended Content -->
+    <div class="overlay hidden">
+      <button class="close-overlay">×</button>
+
+      <div class="overlay-content">
+        <h1>CASA BATLLÓ</h1>
+
+        <p class="intro">
+          Bienvenue dans l'une des créations les plus audacieuses de Gaudí. Casa
+          Batlló n'est pas une simple rénovation : c'est une mutation totale
+          d'un édifice bourgeois en une expression vivante de la nature.
+        </p>
+
+        <section>
+          <h3>LA FAÇADE MARINE</h3>
+          <p>
+            Les balcons ressemblent à des crânes, la façade ondule comme une
+            vague figée. Les mosaïques trencadís recouvrant la surface reflètent
+            la lumière de manière différente à chaque heure du jour. Ce que vous
+            voyez change constamment, comme l'océan. Chaque fenêtre s'ouvre
+            comme un œil sur Passeig de Gràcia.
+          </p>
+        </section>
+
+        <section>
+          <h3>L'INTÉRIEUR ORGANIQUE</h3>
+          <p>
+            À l'intérieur, aucune ligne droite. Gaudí refuse la géométrie
+            euclidienne. Les escaliers se tordent, les portes sont des formes
+            ovales rappelant des os. Les murs ondulent comme la peau. Chaque
+            pièce respire, chaque coin invite à explorer. La lumière qui
+            traverse les vitraux coloriés peint les murs de nuances qui évoluent
+            au cours du jour.
+          </p>
+        </section>
+
+        <section>
+          <h3>LE DÉTAIL GAUDIEN</h3>
+          <p>
+            Les poignées de porte : des formes organiques qui s'ajustent à la
+            paume de la main comme une coquille. Les rampes d'escalier : du fer
+            forgé qui ressemble à des algues. Les carrelages : des designs
+            uniques dans chaque salle d'eau. Gaudí croyait que l'architecture
+            devait toucher tous les sens.
+          </p>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="stats-grid">
+          <div class="stats-item1">
+            <h4>HAUTEUR</h4>
+            <p>32 m</p>
+          </div>
+
+          <div class="stats-item2">
+            <h4>CLASSEMENT UNESCO</h4>
+            <p>2005</p>
+          </div>
+
+          <div class="stats-item3">
+            <h4>ARCHITECTE</h4>
+            <p>Antoni Gaudí</p>
+          </div>
+
+          <div class="stats-item4">
+            <h4>CONSTRUCTION</h4>
+            <p>1904-1906</p>
+          </div>
+
+          <div class="stats-item5">
+            <h4>APPARTEMENTS</h4>
+            <p>8</p>
+          </div>
+
+          <div class="stats-item5">
+            <h4>SURFACE</h4>
+            <p>4.500 m²</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Script to handle overlay -->
+    <script>
+      const overlay = document.querySelector(".overlay");
+      const openBtn = document.getElementById("openOverlay");
+      const closeBtn = document.querySelector(".close-overlay");
+
+      openBtn.addEventListener("click", () => {
+        overlay.classList.remove("hidden");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        overlay.classList.add("hidden");
+      });
+
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+          overlay.classList.add("hidden");
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          overlay.classList.add("hidden");
+        }
+      });
+    </script>
+  </body>
 </html>

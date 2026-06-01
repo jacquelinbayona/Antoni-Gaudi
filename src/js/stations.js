@@ -10,6 +10,7 @@ const STATIONS = [
     height: "172 m (prévu)",
     classement: "UNESCO 2005",
     icon: "S·F",
+    page: "pages/sagradafamilia.html",
     colors: [
       "#C4622D",
       "#D4A843",
@@ -30,6 +31,7 @@ const STATIONS = [
     height: "32 m",
     classement: "UNESCO 2005",
     icon: "C·B",
+    page: "pages/casabatllo.html",
     colors: [
       "#1A3F8F",
       "#4A9FD4",
@@ -50,6 +52,7 @@ const STATIONS = [
     height: "—",
     classement: "UNESCO 1984",
     icon: "P·G",
+    page: "pages/parcguell.html",
     colors: [
       "#3A6B4A",
       "#FFDE21",
@@ -70,6 +73,7 @@ const STATIONS = [
     height: "47 m",
     classement: "UNESCO 1984",
     icon: "L·P",
+    page: "pages/lapedrera.html",
     colors: [
       "#FFDE21",
       "#C4622D",
@@ -81,9 +85,20 @@ const STATIONS = [
     ],
   },
 ];
+
+/* Navigation function - opens building page */
+function navigateToBuilding(index) {
+  const station = STATIONS[index];
+  if (station && station.page) {
+    window.location.href = station.page;
+  }
+}
+
+/* Overlay functions (if needed on homepage) */
 const container = document.querySelector(".stations-container");
 
 function renderStations() {
+  if (!container) return;
   container.innerHTML = "";
 
   STATIONS.forEach((station, index) => {
@@ -105,11 +120,16 @@ function renderStations() {
   });
 }
 
-renderStations();
+if (container) {
+  renderStations();
+}
+
 const overlay = document.querySelector(".detail-overlay");
 const overlayContent = document.querySelector(".overlay-content");
 
 function openOverlay(station) {
+  if (!overlay || !overlayContent) return;
+
   overlayContent.innerHTML = `
     <div class="overlay-header">
       <span class="tag">${station.tag}</span>
@@ -135,21 +155,18 @@ function openOverlay(station) {
 
   overlay.classList.add("active");
 }
-document.querySelector(".overlay-close").addEventListener("click", () => {
-  overlay.classList.remove("active");
-});
 
-overlay.addEventListener("click", (e) => {
-  if (e.target === overlay) {
-    overlay.classList.remove("active");
-  }
-});
-document.querySelector(".overlay-close").addEventListener("click", () => {
-  overlay.classList.remove("active");
-});
+const closeBtn = document.querySelector(".overlay-close");
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    if (overlay) overlay.classList.remove("active");
+  });
+}
 
-overlay.addEventListener("click", (e) => {
-  if (e.target === overlay) {
-    overlay.classList.remove("active");
-  }
-});
+if (overlay) {
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove("active");
+    }
+  });
+}
