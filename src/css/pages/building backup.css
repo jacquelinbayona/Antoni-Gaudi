@@ -7,14 +7,19 @@
   position: fixed;
   inset: 0;
   background: var(--night);
-  overflow-y: auto;
   z-index: 200;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+  overflow: hidden;
 }
-.detail-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 120px 60px;
+#detail-overlay.open {
+  opacity: 1;
+  pointer-events: all;
 }
+
 /* Left panel */
 .detail-left {
   padding: 60px 48px 48px;
@@ -45,12 +50,11 @@
 }
 .detail-title {
   font-family: "Cormorant Garamond", serif;
-  text-align: center;
   font-weight: 300;
-  font-size: clamp(5rem, 10vw, 10rem);
-}
-.detail-section {
-  margin-top: 80px;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 10px;
 }
 .detail-year {
   font-size: 11px;
@@ -84,10 +88,43 @@
   font-size: 18px;
   color: var(--white);
 }
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+/* Right panel — mosaic visual */
+.detail-right {
+  position: relative;
+  overflow: hidden;
+  background: var(--night2);
 }
+.mosaic-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+}
+.mosaic-cell {
+  border-radius: 2px;
+  transition: opacity 0.3s;
+}
+.detail-right-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 2;
+}
+.monument-icon {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 120px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(242, 234, 216, 0.06);
+  line-height: 1;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+}
+
 /* Close + nav */
 .detail-nav {
   position: absolute;
@@ -111,6 +148,37 @@
 }
 .detail-close:hover {
   color: var(--terracotta);
+}
+.detail-nav-arrows button {
+  background: none;
+  border: 1px solid rgba(242, 234, 216, 0.15);
+  color: var(--white);
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 14px;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+.detail-nav-arrows button:hover {
+  border-color: var(--terracotta);
+  background: rgba(196, 98, 45, 0.1);
+}
+
+/* Gaudi ornamental border */
+.ornament {
+  position: absolute;
+  pointer-events: none;
+}
+.ornament-tl {
+  top: 16px;
+  left: 16px;
+}
+.ornament-br {
+  bottom: 16px;
+  right: 16px;
+  transform: rotate(180deg);
 }
 
 /* ── PROGRESS LINE ── */

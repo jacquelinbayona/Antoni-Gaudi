@@ -81,3 +81,75 @@ const STATIONS = [
     ],
   },
 ];
+const container = document.querySelector(".stations-container");
+
+function renderStations() {
+  container.innerHTML = "";
+
+  STATIONS.forEach((station, index) => {
+    const card = document.createElement("div");
+    card.classList.add("station-card");
+
+    card.innerHTML = `
+      <div class="station-icon">${station.icon}</div>
+      <div class="station-meta">
+        <p class="tag">${station.tag}</p>
+        <h3>${station.title}</h3>
+        <p class="year">${station.year}</p>
+      </div>
+    `;
+
+    card.addEventListener("click", () => openOverlay(station));
+
+    container.appendChild(card);
+  });
+}
+
+renderStations();
+const overlay = document.querySelector(".detail-overlay");
+const overlayContent = document.querySelector(".overlay-content");
+
+function openOverlay(station) {
+  overlayContent.innerHTML = `
+    <div class="overlay-header">
+      <span class="tag">${station.tag}</span>
+      <h2>${station.title}</h2>
+      <p class="year">${station.year}</p>
+    </div>
+
+    <div class="overlay-body">
+      <p class="desc">${station.desc}</p>
+
+      <div class="info-grid">
+        <div><strong>Architecte</strong><p>${station.archi}</p></div>
+        <div><strong>Style</strong><p>${station.style}</p></div>
+        <div><strong>Hauteur</strong><p>${station.height}</p></div>
+        <div><strong>UNESCO</strong><p>${station.classement}</p></div>
+      </div>
+
+      <div class="color-palette">
+        ${station.colors.map((c) => `<span style="background:${c}"></span>`).join("")}
+      </div>
+    </div>
+  `;
+
+  overlay.classList.add("active");
+}
+document.querySelector(".overlay-close").addEventListener("click", () => {
+  overlay.classList.remove("active");
+});
+
+overlay.addEventListener("click", (e) => {
+  if (e.target === overlay) {
+    overlay.classList.remove("active");
+  }
+});
+document.querySelector(".overlay-close").addEventListener("click", () => {
+  overlay.classList.remove("active");
+});
+
+overlay.addEventListener("click", (e) => {
+  if (e.target === overlay) {
+    overlay.classList.remove("active");
+  }
+});
