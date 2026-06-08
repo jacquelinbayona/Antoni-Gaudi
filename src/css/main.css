@@ -188,15 +188,15 @@ body::after {
   transform-origin: center center;
   overflow: hidden;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   width: 100%;
 }
 
 #wagon-svg {
-  width: min(220vw, 2200px);
-  scale: 1.5;
-
+  width: min(100vw, 1200px);
+  scale: 1;
+  max-width: 90vw;
   transform-origin: center center;
   filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.8))
     drop-shadow(0 0 40px rgba(196, 98, 45, 0.15));
