@@ -31,7 +31,7 @@ const STATIONS = [
     height: "32 m",
     classement: "UNESCO 2005",
     icon: "C·B",
-    page: "pages/casabatllo.html",
+    page: "casabatllo.html",
     colors: [
       "#1A3F8F",
       "#4A9FD4",
@@ -52,7 +52,7 @@ const STATIONS = [
     height: "—",
     classement: "UNESCO 1984",
     icon: "P·G",
-    page: "pages/parcguell.html",
+    page: "parcguell.html",
     colors: [
       "#3A6B4A",
       "#FFDE21",
@@ -73,7 +73,7 @@ const STATIONS = [
     height: "47 m",
     classement: "UNESCO 1984",
     icon: "L·P",
-    page: "pages/lapedrera.html",
+    page: "lapedrera.html",
     colors: [
       "#FFDE21",
       "#C4622D",

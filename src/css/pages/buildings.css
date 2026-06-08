@@ -18,7 +18,10 @@ body[data-station] {
   font-family: "DM Sans", sans-serif;
   overflow-x: hidden;
 }
-
+h2 {
+  font-family: "Eckmania", serif;
+  font-weight: 300;
+}
 .background-pattern {
   position: fixed;
   inset: 0;
@@ -52,15 +55,15 @@ body[data-station] {
 }
 
 .back-btn {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: rgba(242, 234, 216, 0.6);
-  background: none;
-  border: 1px solid rgba(242, 234, 216, 0.15);
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  color: #47a2ff;
+  text-align: center;
+  font-family: "00 Eckmania Display Non-Commercial";
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 95%; /* 60.8px */
+  letter-spacing: -2.56px;
+  text-transform: uppercase;
   text-decoration: none;
 }
 

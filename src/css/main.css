@@ -50,7 +50,9 @@ body {
   overflow-x: hidden;
   cursor: none;
 }
-
+.invisible {
+  display: none !important;
+}
 /* ── HOMEPAGE CREDIT ── */
 #homepage-credit {
   position: fixed;
