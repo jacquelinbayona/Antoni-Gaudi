@@ -52,7 +52,7 @@ body[data-station] {
 }
 
 .back-btn {
-  font-family: "DM Mono", monospace;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 12px;
   letter-spacing: 2px;
   color: rgba(242, 234, 216, 0.6);
@@ -70,7 +70,7 @@ body[data-station] {
 }
 
 .building-header h2 {
-  font-family: "DM Mono", monospace;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -111,6 +111,12 @@ body[data-station] {
   border-color: var(--terracotta);
   color: var(--terracotta);
   transform: scale(1.1);
+}
+
+.audio-btn.playing {
+  border-color: var(--mosaic-gold);
+  color: var(--mosaic-gold);
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.18);
 }
 
 /* ──── MAIN BUILDING PAGE ──── */
@@ -164,7 +170,7 @@ body[data-station] {
 }
 
 .hero h1 {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Eckmania", serif;
   font-size: clamp(3rem, 8vw, 5rem);
   font-weight: 300;
   letter-spacing: 2px;
@@ -175,7 +181,7 @@ body[data-station] {
 }
 
 .hero p {
-  font-family: "DM Mono", monospace;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -195,7 +201,7 @@ body[data-station] {
 }
 
 .building-info h2 {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Eckmania", serif;
   font-size: 2.5rem;
   font-weight: 300;
   margin-bottom: 20px;
@@ -224,7 +230,7 @@ body[data-station] {
 }
 
 .facts h3 {
-  font-family: "DM Mono", monospace;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 9px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -233,7 +239,7 @@ body[data-station] {
 }
 
 .facts p {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 1.5rem;
   color: var(--white);
   margin: 0;
@@ -323,7 +329,7 @@ body[data-station] {
 }
 
 .overlay-content section h3 {
-  font-family: "DM Mono", monospace;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -357,7 +363,7 @@ body[data-station] {
 }
 
 .stats-grid h4 {
-  font-family: "DM Mono", monospace;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 8px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -366,7 +372,7 @@ body[data-station] {
 }
 
 .stats-grid p {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 1.8rem;
   color: var(--white);
   margin: 0;

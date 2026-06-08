@@ -10,7 +10,7 @@ const STATIONS = [
     height: "172 m (prévu)",
     classement: "UNESCO 2005",
     icon: "S·F",
-    page: "pages/sagradafamilia.html",
+    page: "sagradafamilia.html",
     colors: [
       "#C4622D",
       "#D4A843",

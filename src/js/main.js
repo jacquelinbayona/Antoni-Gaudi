@@ -240,8 +240,11 @@ function jouerVoix() {
   audio.play();
 }
 
-// Changer la langue
-document.getElementById("btn-fr").addEventListener("click", () => {
-  langueActive = "fr";
-  jouerVoix();
-});
+// Changer la langue (sécurisé : le bouton n'existe pas sur toutes les pages)
+const btnFr = document.getElementById("btn-fr");
+if (btnFr) {
+  btnFr.addEventListener("click", () => {
+    langueActive = "fr";
+    jouerVoix();
+  });
+}

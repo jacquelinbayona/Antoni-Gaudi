@@ -9,16 +9,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
     <!-- JS -->
-    <script src="../js/i18n.js"></script>
-    <script src="../js/navigation.js"></script>
-    <script src="../js/animations.js"></script>
-    <script src="../js/cursor.js"></script>
-    <script src="../js/stations.js"></script>
+    <script src="./js/i18n.js"></script>
+    <script src="./js/navigation.js"></script>
+    <script src="./js/animations.js"></script>
+    <script src="./js/cursor.js"></script>
+    <script src="./js/stations.js"></script>
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/reset.css" />
-    <link rel="stylesheet" href="../css/layout.css" />
-    <link rel="stylesheet" href="../css/components.css" />
-    <link rel="stylesheet" href="../css/pages/buildings.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/pages/buildings.css" />
   </head>
   <body data-station="0">
     <!-- Background mosaico -->
@@ -26,22 +26,30 @@
 
     <!-- Header -->
     <header class="building-header">
-      <a class="back-btn" href="../index.html">← Retour</a>
+      <a class="back-btn" href="./index.html">← Retour</a>
       <h2>STATION 01 · BARCELONA</h2>
     </header>
 
     <!-- Botones laterales -->
     <aside class="floating-actions">
-      <button class="audio-btn" aria-label="Audio guide">🔊</button>
+      <button class="audio-btn" aria-label="Lecture audio" aria-pressed="false">
+        🔊
+      </button>
       <button id="openOverlay" aria-label="Voir plus">ℹ️</button>
     </aside>
+
+    <audio
+      id="audio-guide"
+      src="./audio/sagradafamilia.mp3"
+      preload="auto"
+    ></audio>
 
     <!-- Main Content -->
     <main class="building-page">
       <!-- Hero Section -->
       <section class="hero">
         <img
-          src="../assets/sagradafamilia.svg"
+          src="./assets/svg/sagradafamilia.svg"
           class="hero-illustration"
           alt="Sagrada Familia"
         />
@@ -85,7 +93,7 @@
           <!-- Building Image -->
           <div class="building-image">
             <img
-              src="../assets/sagradafamilia.svg"
+              src="./assets/svg/sagradafamilia.svg"
               alt="Sagrada Familia building"
             />
           </div>
@@ -184,6 +192,32 @@
       const overlay = document.querySelector(".overlay");
       const openBtn = document.getElementById("openOverlay");
       const closeBtn = document.querySelector(".close-overlay");
+      const audioBtn = document.querySelector(".audio-btn");
+      const audioGuide = document.getElementById("audio-guide");
+
+      if (audioBtn && audioGuide) {
+        audioBtn.addEventListener("click", async () => {
+          if (!audioGuide.paused) {
+            audioGuide.pause();
+            audioBtn.classList.remove("playing");
+            audioBtn.setAttribute("aria-pressed", "false");
+            return;
+          }
+
+          try {
+            await audioGuide.play();
+            audioBtn.classList.add("playing");
+            audioBtn.setAttribute("aria-pressed", "true");
+          } catch (error) {
+            console.warn("Audio playback failed:", error);
+          }
+        });
+
+        audioGuide.addEventListener("ended", () => {
+          audioBtn.classList.remove("playing");
+          audioBtn.setAttribute("aria-pressed", "false");
+        });
+      }
 
       openBtn.addEventListener("click", () => {
         overlay.classList.remove("hidden");
