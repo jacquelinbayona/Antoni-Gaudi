@@ -44,7 +44,7 @@ html {
 }
 
 body {
-  background: var(--night);
+  background: radial-gradient(ellipse at 50% 60%, #1a1f2e 0%, #080a10 100%);
   color: var(--white);
   font-family: "Plus Jakarta Sans", sans-serif;
   overflow-x: hidden;
@@ -79,28 +79,148 @@ body {
   z-index: 10010;
 }
 .trencadis-btn {
-  width: 40px;
-  height: 40px;
+  width: 96px;
+  height: 68px;
   border-radius: 6px;
-  border: 2px solid rgba(255, 255, 255, 0.08);
   padding: 0;
   cursor: pointer;
-  box-shadow: 0 6px 12px rgba(2, 6, 23, 0.6);
-  background-size: 60% 60%;
-  background-position: center;
-  background-repeat: no-repeat;
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  font-weight: 700;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+  /* solid base color replaces mosaic */
+  background: var(--t1, #005cbd);
+  color: #fff;
 }
+/* decorative small trencadís shards around the button */
+.trencadis-btn::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  pointer-events: none;
+  border-radius: 8px;
+  /* multiple small circular shards placed around the button */
+  background-image:
+    radial-gradient(
+      circle at 8% 12%,
+      var(--sh1, rgba(255, 255, 255, 0.9)) 0 6px,
+      transparent 7px
+    ),
+    radial-gradient(
+      circle at 88% 16%,
+      var(--sh2, rgba(255, 255, 255, 0.85)) 0 6px,
+      transparent 7px
+    ),
+    radial-gradient(
+      circle at 18% 86%,
+      var(--sh3, rgba(255, 255, 255, 0.8)) 0 5px,
+      transparent 6px
+    ),
+    radial-gradient(
+      circle at 82% 80%,
+      var(--sh4, rgba(255, 255, 255, 0.75)) 0 5px,
+      transparent 6px
+    ),
+    radial-gradient(
+      circle at 50% 2%,
+      var(--sh5, rgba(255, 255, 255, 0.6)) 0 8px,
+      transparent 9px
+    );
+  background-repeat: no-repeat;
+  mix-blend-mode: screen;
+  filter: hue-rotate(0deg);
+  transition: filter 0.6s linear;
+  animation: shardShift 3.6s linear infinite;
+}
+
+/* outline (thick border, bright for each language) */
+.trencadis-btn::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: -1;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+/* shapes per language (irregular polygon like trencadís flag) */
 .trencadis-btn[data-lang="en"] {
-  background: linear-gradient(135deg, #005cbd 0%, #2a7ee6 100%);
+  --t1: #005cbd; /* base fill */
+  --accent: #4a9cff;
+  clip-path: polygon(6% 12%, 92% 8%, 84% 84%, 12% 88%, 4% 44%);
+  transform: rotate(-3deg);
+  /* shards base colors */
+  --sh1: rgba(255, 255, 255, 0.95);
+  --sh2: rgba(255, 255, 255, 0.9);
+  --sh3: rgba(255, 255, 255, 0.8);
+  --sh4: rgba(255, 255, 255, 0.7);
+  --sh5: rgba(255, 255, 255, 0.6);
+  animation-duration: 0s;
 }
 .trencadis-btn[data-lang="fr"] {
-  background: linear-gradient(135deg, #3a6b4a 0%, #66b37a 100%);
+  --t1: #1f5f3b;
+  --accent: #4ad36f;
+  clip-path: polygon(8% 10%, 90% 14%, 82% 86%, 14% 84%, 6% 48%);
+  transform: rotate(-1deg);
+  --sh1: rgba(255, 255, 255, 0.95);
+  --sh2: rgba(255, 255, 255, 0.9);
+  --sh3: rgba(255, 255, 255, 0.8);
+  --sh4: rgba(255, 255, 255, 0.7);
+  --sh5: rgba(255, 255, 255, 0.6);
 }
 .trencadis-btn[data-lang="es"] {
-  background: linear-gradient(135deg, #c4622d 0%, #ff8a4a 100%);
+  --t1: #b83f2a;
+  --accent: #ff6b5a;
+  clip-path: polygon(6% 14%, 92% 12%, 86% 82%, 20% 86%, 8% 50%);
+  transform: rotate(2deg);
+  --sh1: rgba(255, 255, 255, 0.95);
+  --sh2: rgba(255, 255, 255, 0.9);
+  --sh3: rgba(255, 255, 255, 0.8);
+  --sh4: rgba(255, 255, 255, 0.7);
+  --sh5: rgba(255, 255, 255, 0.6);
 }
 .trencadis-btn[data-lang="ca"] {
-  background: linear-gradient(135deg, #ffde21 0%, #ffd64d 100%);
+  --t1: #ffde21;
+  --accent: #ffd84d;
+  clip-path: polygon(6% 12%, 92% 10%, 86% 74%, 64% 86%, 12% 88%, 6% 54%);
+  transform: rotate(4deg);
+  --sh1: rgba(0, 0, 0, 0.6);
+  --sh2: rgba(255, 255, 255, 0.9);
+  --sh3: rgba(255, 255, 255, 0.8);
+  --sh4: rgba(255, 255, 255, 0.7);
+  --sh5: rgba(255, 255, 255, 0.6);
+}
+
+/* border color via box-shadow on ::after to get colored outline */
+.trencadis-btn[data-lang="en"]::after {
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.6),
+    0 0 0 4px rgba(74, 156, 255, 0.85);
+}
+.trencadis-btn[data-lang="fr"]::after {
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.6),
+    0 0 0 4px rgba(74, 210, 110, 0.85);
+}
+.trencadis-btn[data-lang="es"]::after {
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.6),
+    0 0 0 4px rgba(255, 86, 86, 0.9);
+}
+.trencadis-btn[data-lang="ca"]::after {
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.6),
+    0 0 0 4px rgba(255, 210, 50, 0.95);
+}
+
+.trencadis-btn:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.12);
 }
 .trencadis-btn:focus {
   outline: 3px solid rgba(255, 255, 255, 0.12);
@@ -110,6 +230,23 @@ body {
     0 8px 20px rgba(0, 0, 0, 0.6),
     0 0 8px rgba(255, 222, 33, 0.06);
   transform: translateY(-2px);
+}
+
+@keyframes shardShift {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(60deg);
+  }
+  100% {
+    filter: hue-rotate(0deg);
+  }
+}
+
+.trencadis-btn:hover::before {
+  animation-duration: 2.2s;
+  transform: scale(1.02);
 }
 
 /* ── MOSAIC GRAIN OVERLAY ── */
@@ -220,8 +357,19 @@ body::after {
 .tunnel-arch {
   border: none !important;
 }
+/* Show the SVG city grid and make it more visible */
 #city-grid {
-  display: none !important;
+  display: block !important;
+  /* slightly stronger stroke and opacity for better visibility */
+  stroke: rgba(255, 255, 255, 0.12) !important;
+  stroke-width: 1 !important;
+  opacity: 0.5 !important;
+}
+
+/* If individual grid lines need stronger contrast, target them in the SVG */
+#map-svg #city-grid line {
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 1;
 }
 .rail-line {
   height: 3px;
@@ -420,8 +568,9 @@ body::after {
   position: absolute;
   z-index: 54;
   opacity: 0;
-  pointer-events: none;
+  pointer-events: auto;
   white-space: nowrap;
+  cursor: pointer;
 }
 .st-label-inner {
   background: rgba(12, 15, 20, 0.88);
@@ -430,11 +579,12 @@ body::after {
   backdrop-filter: blur(8px);
 }
 .st-label h4 {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Eckmania", serif;
   font-size: 15px;
   font-weight: 400;
   color: var(--mosaic-gold);
   margin-bottom: 2px;
+  cursor: pointer;
 }
 .st-label p {
   font-size: 8px;

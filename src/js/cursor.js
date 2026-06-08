@@ -13,8 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  document.querySelectorAll("button, .st-dot, .detail-close").forEach((el) => {
-    el.addEventListener("mouseenter", () => cursor.classList.add("hovered"));
-    el.addEventListener("mouseleave", () => cursor.classList.remove("hovered"));
-  });
+  document
+    .querySelectorAll("button, .st-dot, .st-label, .ton-bouton, .detail-close")
+    .forEach((el) => {
+      el.addEventListener("mouseenter", () => cursor.classList.add("hovered"));
+      el.addEventListener("mouseleave", () =>
+        cursor.classList.remove("hovered"),
+      );
+    });
 });

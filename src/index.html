@@ -91,7 +91,8 @@
             id="map-svg"
             viewBox="0 0 1000 650"
             xmlns="http://www.w3.org/2000/svg"
-            style="position: absolute; inset: 0; width: 100%; height: 100%"
+            overflow="visible"
+            style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible"
           >
             <defs>
               <filter id="glow-f">
@@ -123,30 +124,29 @@
             <!-- CITY GRID (Eixample pattern) -->
             <g
               id="city-grid"
-              stroke="rgba(255,255,255,0.03)"
+              stroke="rgba(255,255,255,0.035)"
               stroke-width="1"
               fill="none"
             >
-              <line x1="0" y1="120" x2="1000" y2="120" />
-              <line x1="0" y1="210" x2="1000" y2="210" />
-              <line x1="0" y1="300" x2="1000" y2="300" />
-              <line x1="0" y1="390" x2="1000" y2="390" />
-              <line x1="0" y1="480" x2="1000" y2="480" />
-              <line x1="0" y1="570" x2="1000" y2="570" />
-              <line x1="120" y1="0" x2="120" y2="650" />
-              <line x1="240" y1="0" x2="240" y2="650" />
-              <line x1="360" y1="0" x2="360" y2="650" />
-              <line x1="480" y1="0" x2="480" y2="650" />
-              <line x1="600" y1="0" x2="600" y2="650" />
-              <line x1="720" y1="0" x2="720" y2="650" />
-              <line x1="840" y1="0" x2="840" y2="650" />
-              <line x1="960" y1="0" x2="960" y2="650" />
+              <!-- 4 horizontal lines (subtle) -->
+              <line x1="0" y1="130" x2="1200" y2="130" />
+              <line x1="0" y1="300" x2="1200" y2="300" />
+              <line x1="0" y1="460" x2="1200" y2="460" />
+              <line x1="0" y1="590" x2="1200" y2="590" />
+
+              <!-- 6 vertical lines (subtle) -->
+              <line x1="120" y1="-50" x2="120" y2="700" />
+              <line x1="300" y1="-50" x2="300" y2="700" />
+              <line x1="480" y1="-50" x2="480" y2="700" />
+              <line x1="660" y1="-50" x2="660" y2="700" />
+              <line x1="840" y1="-50" x2="840" y2="700" />
+              <line x1="980" y1="-50" x2="980" y2="700" />
             </g>
-            <!-- Diagonal (Avinguda Diagonal) -->
+            <!-- Diagonal (Avinguda Diagonal) - extended -->
             <line
-              x1="0"
-              y1="420"
-              x2="1000"
+              x1="-200"
+              y1="520"
+              x2="1200"
               y2="120"
               stroke="rgba(255,255,255,0.06)"
               stroke-width="16"
@@ -697,13 +697,13 @@
               <circle cx="560" cy="415" r="1.5" fill="rgba(255,222,33,0.6)" />
             </g>
 
-            <!-- BCN watermark -->
+            <!-- BCN watermark (use Eckmania to match INTRO 'EXPERIENCE') -->
             <text
               x="30"
               y="360"
               fill="rgba(255,255,255,0.025)"
               font-size="120"
-              font-family="Cormorant Garamond,serif"
+              font-family="Eckmania, serif"
               font-style="italic"
             >
               BCN
@@ -717,6 +717,18 @@
                 y="90"
                 width="80"
                 height="80"
+                preserveAspectRatio="xMidYMid meet"
+              />
+            </g>
+
+            <!-- Sagrada Família image (positioned to match label at ~74% / 22%) -->
+            <g id="bld-sagrada" opacity="0" filter="url(#soft-glow)">
+              <image
+                href="assets/svg/sagradafamilia.svg"
+                x="690"
+                y="93"
+                width="100"
+                height="100"
                 preserveAspectRatio="xMidYMid meet"
               />
             </g>
@@ -856,25 +868,25 @@
           ></div>
 
           <!-- Labels -->
-          <div class="st-label" id="lbl-0" style="left: 74%; top: 22%">
+          <div class="st-label" id="lbl-0" style="left: 74%; top: 22%" onclick="navigateToBuilding(0)">
             <div class="st-label-inner">
               <h4>Sagrada Família</h4>
               <p>Station 01 · Eixample</p>
             </div>
           </div>
-          <div class="st-label" id="lbl-1" style="left: 18%; top: 46%">
+          <div class="st-label" id="lbl-1" style="left: 18%; top: 46%" onclick="navigateToBuilding(1)">
             <div class="st-label-inner">
               <h4>Casa Batlló</h4>
               <p>Station 02 · Passeig de Gràcia</p>
             </div>
           </div>
-          <div class="st-label" id="lbl-2" style="left: 18%; top: 10%">
+          <div class="st-label" id="lbl-2" style="left: 18%; top: 10%" onclick="navigateToBuilding(2)">
             <div class="st-label-inner">
               <h4>Park Güell</h4>
               <p>Station 03 · Gràcia</p>
             </div>
           </div>
-          <div class="st-label" id="lbl-3" style="left: 38%; top: 69%">
+          <div class="st-label" id="lbl-3" style="left: 38%; top: 69%" onclick="navigateToBuilding(3)">
             <div class="st-label-inner">
               <h4>La Pedrera</h4>
               <p>Station 02 · Passeig de Garcia</p>
