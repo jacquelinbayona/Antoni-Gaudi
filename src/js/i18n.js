@@ -24,6 +24,7 @@ function setLanguage(lang) {
   currentLang = lang;
   localStorage.setItem("lang", lang);
   applyTranslations();
+  window.dispatchEvent(new CustomEvent("langChanged", { detail: { lang } }));
 }
 
 // update html lang attribute and active button state

@@ -14,13 +14,21 @@
     <script src="./js/animations.js"></script>
     <script src="./js/cursor.js"></script>
     <script src="./js/stations.js"></script>
+    <script src="./js/audio-player.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="./css/layout.css" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/pages/buildings.css" />
   </head>
-  <body data-station="0">
+  <!-- dans le <head> -->
+  <script src="./js/trencadis-fond.js"></script>
+
+  <!-- juste avant </body> -->
+  <script>
+    document.addEventListener("DOMContentLoaded", initTrencadis);
+  </script>
+  <body data-station="0" data-audio-page="sagradafamilia">
     <!-- Background mosaico -->
     <div class="background-pattern"></div>
 
@@ -192,32 +200,8 @@
       const overlay = document.querySelector(".overlay");
       const openBtn = document.getElementById("openOverlay");
       const closeBtn = document.querySelector(".close-overlay");
-      const audioBtn = document.querySelector(".audio-btn");
-      const audioGuide = document.getElementById("audio-guide");
 
-      if (audioBtn && audioGuide) {
-        audioBtn.addEventListener("click", async () => {
-          if (!audioGuide.paused) {
-            audioGuide.pause();
-            audioBtn.classList.remove("playing");
-            audioBtn.setAttribute("aria-pressed", "false");
-            return;
-          }
-
-          try {
-            await audioGuide.play();
-            audioBtn.classList.add("playing");
-            audioBtn.setAttribute("aria-pressed", "true");
-          } catch (error) {
-            console.warn("Audio playback failed:", error);
-          }
-        });
-
-        audioGuide.addEventListener("ended", () => {
-          audioBtn.classList.remove("playing");
-          audioBtn.setAttribute("aria-pressed", "false");
-        });
-      }
+      initAudioGuide();
 
       openBtn.addEventListener("click", () => {
         overlay.classList.remove("hidden");

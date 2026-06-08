@@ -14,13 +14,21 @@
     <script src="./js/animations.js"></script>
     <script src="./js/cursor.js"></script>
     <script src="./js/stations.js"></script>
+    <script src="./js/audio-player.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="./css/layout.css" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/pages/buildings.css" />
   </head>
-  <body data-station="1">
+  <!-- dans le <head> -->
+  <script src="./js/trencadis-fond.js"></script>
+
+  <!-- juste avant </body> -->
+  <script>
+    document.addEventListener("DOMContentLoaded", initTrencadis);
+  </script>
+  <body data-station="1" data-audio-page="casabatllo">
     <!-- Background mosaico -->
     <div class="background-pattern"></div>
 
@@ -32,9 +40,13 @@
 
     <!-- Botones laterales -->
     <aside class="floating-actions">
-      <button class="audio-btn" aria-label="Audio guide">🔊</button>
+      <button class="audio-btn" aria-label="Lecture audio" aria-pressed="false">
+        🔊
+      </button>
       <button id="openOverlay" aria-label="Voir plus">ℹ️</button>
     </aside>
+
+    <audio id="audio-guide" src="./audio/casa-fr.mp3" preload="auto"></audio>
 
     <!-- Main Content -->
     <main class="building-page">
@@ -176,6 +188,8 @@
       const overlay = document.querySelector(".overlay");
       const openBtn = document.getElementById("openOverlay");
       const closeBtn = document.querySelector(".close-overlay");
+
+      initAudioGuide();
 
       openBtn.addEventListener("click", () => {
         overlay.classList.remove("hidden");
