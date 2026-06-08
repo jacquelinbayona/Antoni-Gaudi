@@ -3,7 +3,7 @@
 
 @font-face {
   font-family: "Eckmania";
-  src: url("../assets/fonts/00EckmaniaDisplayNon-Commercial-Regular.otf")
+  src: url("../../dist/00EckmaniaDisplayNon-Commercial-Regular.f82f53a0.otf")
     format("opentype");
   font-weight: 400;
   font-style: normal;
@@ -46,7 +46,7 @@ html {
 body {
   background: var(--night);
   color: var(--white);
-  font-family: "DM Mono", monospace;
+  font-family: "Plus Jakarta Sans", sans-serif;
   overflow-x: hidden;
   cursor: none;
 }
@@ -195,7 +195,9 @@ body::after {
 
 #wagon-svg {
   width: min(220vw, 2200px);
-  transform-origin: left center;
+  scale: 1.5;
+
+  transform-origin: center center;
   filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.8))
     drop-shadow(0 0 40px rgba(196, 98, 45, 0.15));
 }
