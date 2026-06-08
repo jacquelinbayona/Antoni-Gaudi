@@ -532,6 +532,9 @@ body::after {
   height: 16px;
   border-radius: 50%;
   background: var(--white);
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+
   pointer-events: none;
   z-index: 50;
   opacity: 0;
@@ -549,7 +552,7 @@ body::after {
   border-radius: 50%;
   background: var(--terracotta);
   border: 3px solid var(--white);
-  transform: translate(-50%, -50%);
+  transform: translate(-20%, -50%);
   cursor: pointer;
   z-index: 55;
   opacity: 0;
