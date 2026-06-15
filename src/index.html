@@ -12,7 +12,6 @@
     <script src="js/navigation.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/cursor.js"></script>
-    <script src="js/stations.js"></script>
     <script src="js/map-buildings.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="css/reset.css" />
@@ -847,59 +846,63 @@
 
           <!-- Station dots (HTML overlays positioned via % matching SVG coords 0-1000x0-650) -->
           <!-- Sagrada: 720/1000=72%  180/650=27.7% -->
-          <div
+          <a
             class="st-dot"
             id="dot-0"
+            href="sagradafamilia.html"
+            aria-label="Sagrada Familia"
             style="left: 72%; top: 27.7%"
-            onclick="navigateToBuilding(0)"
-          ></div>
+          ></a>
           <!-- Batlló: 340/1000=34%  290/650=44.6% -->
-          <div
+          <a
             class="st-dot"
             id="dot-1"
+            href="casabatllo.html"
+            aria-label="Casa Batllo"
             style="left: 34%; top: 44.6%"
-            onclick="navigateToBuilding(1)"
-          ></div>
+          ></a>
           <!-- Güell: 160/1000=16%  130/650=20% -->
-          <div
+          <a
             class="st-dot"
             id="dot-2"
+            href="parcguell.html"
+            aria-label="Park Guell"
             style="left: 16%; top: 20%"
-            onclick="navigateToBuilding(2)"
-          ></div>
+          ></a>
           <!-- La Pedrera: 560/1000=56%  420/650=64.6% -->
-          <div
+          <a
             class="st-dot"
             id="dot-3"
+            href="lapedrera.html"
+            aria-label="La Pedrera"
             style="left: 56%; top: 64.6%"
-            onclick="navigateToBuilding(3)"
-          ></div>
+          ></a>
 
           <!-- Labels -->
-          <div class="st-label" id="lbl-0" style="left: 74%; top: 22%" onclick="navigateToBuilding(0)">
+          <a class="st-label" id="lbl-0" href="sagradafamilia.html" style="left: 74%; top: 22%">
             <div class="st-label-inner">
               <h4>Sagrada Família</h4>
               <p>Station 01 · Eixample</p>
             </div>
-          </div>
-          <div class="st-label" id="lbl-1" style="left: 18%; top: 46%" onclick="navigateToBuilding(1)">
+          </a>
+          <a class="st-label" id="lbl-1" href="casabatllo.html" style="left: 18%; top: 46%">
             <div class="st-label-inner">
               <h4>Casa Batlló</h4>
               <p>Station 02 · Passeig de Gràcia</p>
             </div>
-          </div>
-          <div class="st-label" id="lbl-2" style="left: 18%; top: 10%" onclick="navigateToBuilding(2)">
+          </a>
+          <a class="st-label" id="lbl-2" href="parcguell.html" style="left: 18%; top: 10%">
             <div class="st-label-inner">
               <h4>Park Güell</h4>
               <p>Station 03 · Gràcia</p>
             </div>
-          </div>
-          <div class="st-label" id="lbl-3" style="left: 38%; top: 69%" onclick="navigateToBuilding(3)">
+          </a>
+          <a class="st-label" id="lbl-3" href="lapedrera.html" style="left: 38%; top: 69%">
             <div class="st-label-inner">
               <h4>La Pedrera</h4>
               <p>Station 02 · Passeig de Garcia</p>
             </div>
-          </div>
+          </a>
 
           <!-- Station counter -->
           <div id="station-counter">
@@ -914,98 +917,6 @@
       <!-- end sticky-stage -->
     </div>
     <!-- end scroll-wrapper -->
-
-    <!-- ════════════════════════════
-     STATION DETAIL OVERLAY
-════════════════════════════ -->
-    <div id="detail-overlay">
-      <div class="detail-left">
-        <!-- Ornamental corner SVG top-left -->
-        <svg
-          class="ornament ornament-tl"
-          width="60"
-          height="60"
-          viewBox="0 0 60 60"
-          fill="none"
-        >
-          <path
-            d="M2 58 L2 2 L58 2"
-            stroke="rgba(196,98,45,0.3)"
-            stroke-width="1"
-          />
-          <path
-            d="M2 40 Q12 28 28 28 Q40 28 40 16"
-            stroke="rgba(196,98,45,0.2)"
-            stroke-width="0.8"
-            fill="none"
-          />
-          <circle cx="2" cy="2" r="3" fill="var(--terracotta)" opacity="0.5" />
-        </svg>
-
-        <div class="detail-tag" id="d-tag">Station 01 · Eixample</div>
-        <h2 class="detail-title" id="d-title">Sagrada Família</h2>
-        <div class="detail-year" id="d-year">1882 — en cours</div>
-        <p class="detail-desc" id="d-desc">Description ici.</p>
-        <div class="detail-facts">
-          <div>
-            <div class="fact-label">Architecte</div>
-            <div class="fact-val" id="d-archi">Antoni Gaudí</div>
-          </div>
-          <div>
-            <div class="fact-label">Style</div>
-            <div class="fact-val" id="d-style">Modernisme catalan</div>
-          </div>
-          <div>
-            <div class="fact-label">Hauteur</div>
-            <div class="fact-val" id="d-height">172 m</div>
-          </div>
-          <div>
-            <div class="fact-label">Classement</div>
-            <div class="fact-val" id="d-class">UNESCO 2005</div>
-          </div>
-        </div>
-
-        <!-- Ornamental corner bottom-right -->
-        <svg
-          class="ornament ornament-br"
-          width="60"
-          height="60"
-          viewBox="0 0 60 60"
-          fill="none"
-        >
-          <path
-            d="M2 58 L2 2 L58 2"
-            stroke="rgba(196,98,45,0.3)"
-            stroke-width="1"
-          />
-          <path
-            d="M2 40 Q12 28 28 28 Q40 28 40 16"
-            stroke="rgba(196,98,45,0.2)"
-            stroke-width="0.8"
-            fill="none"
-          />
-          <circle cx="2" cy="2" r="3" fill="var(--terracotta)" opacity="0.5" />
-        </svg>
-      </div>
-
-      <div class="detail-right">
-        <!-- Mosaic bg -->
-        <div class="mosaic-grid" id="d-mosaic"></div>
-        <div class="detail-right-content">
-          <div class="monument-icon" id="d-icon">SF</div>
-        </div>
-        <!-- Nav -->
-        <div class="detail-nav">
-          <div class="detail-nav-arrows">
-            <button onclick="prevStation()">←</button>
-            <button onclick="nextStation()">→</button>
-          </div>
-          <button class="detail-close" onclick="closeStation()">
-            ✕ Fermer
-          </button>
-        </div>
-      </div>
-    </div>
 
     <script src="js/main.js"></script>
   </body>
