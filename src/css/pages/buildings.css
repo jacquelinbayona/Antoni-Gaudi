@@ -55,9 +55,9 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  background: rgba(10, 10, 10, 0.8);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(242, 234, 216, 0.08);
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: none;
 }
 
 .back-btn {
