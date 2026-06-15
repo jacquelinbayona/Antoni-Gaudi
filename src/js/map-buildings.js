@@ -91,9 +91,18 @@ function openMapOverlay(info) {
   overlay.querySelector("h2").textContent = info.title;
   overlay.querySelector(".map-info-text").textContent = info.text;
   overlay.querySelector(".map-info-link").href = info.pageUrl;
-  overlay.querySelector(".map-info-facts").innerHTML = info.facts
-    .map(([label, value]) => `<section><h3>${label}</h3><p>${value}</p></section>`)
-    .join("");
+  const factsContainer = overlay.querySelector(".map-info-facts");
+  factsContainer.textContent = "";
+  info.facts.forEach(([label, value]) => {
+    const section = document.createElement("section");
+    const h3 = document.createElement("h3");
+    h3.textContent = label;
+    const p = document.createElement("p");
+    p.textContent = value;
+    section.appendChild(h3);
+    section.appendChild(p);
+    factsContainer.appendChild(section);
+  });
 
   overlay.classList.toggle("is-left", isLeft);
   overlay.classList.toggle("is-right", !isLeft);
