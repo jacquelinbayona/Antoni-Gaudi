@@ -174,6 +174,29 @@ stProgress.forEach((p, i) => {
 });
 
 /* ─────────────────────────────
+   DIRECT ENTRY TO MAP
+───────────────────────────── */
+function scrollToMapScene() {
+  const wrapper = document.getElementById("scroll-wrapper");
+  if (!wrapper) return;
+
+  const scrollDistance = wrapper.offsetHeight - window.innerHeight;
+  const mapProgress = 0.7;
+
+  window.scrollTo({
+    top: wrapper.offsetTop + scrollDistance * mapProgress,
+    behavior: "auto",
+  });
+}
+
+if (window.location.hash === "#map") {
+  window.addEventListener("load", () => {
+    ScrollTrigger.refresh();
+    requestAnimationFrame(scrollToMapScene);
+  });
+}
+
+/* ─────────────────────────────
    WAGON WHEEL SPIN (CSS anim)
 ───────────────────────────── */
 const style = document.createElement("style");
