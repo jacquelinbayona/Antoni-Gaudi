@@ -19,6 +19,7 @@ const buildingMap = {
     labelId: "lbl-1",
     title: "Casa Batlló",
     overlaySide: "left",
+    overlayTop: "57%",
     date: "1904 — 1906",
     text: "Rénovation radicale d'un immeuble bourgeois, la Casa Batlló est une ode à la mer, aux dragons et aux formes organiques. Sa façade de mosaïques irisées change avec la lumière.",
     facts: [
@@ -47,6 +48,8 @@ const buildingMap = {
     labelId: "lbl-3",
     title: "La Pedrera",
     overlaySide: "right",
+    overlayTop: "62%",
+    overlayOffset: "clamp(160px, 14vw, 240px)",
     date: "1906 — 1912",
     text: "Aussi appelée Casa Milà, cette résidence est célèbre pour sa façade de pierre ondulante et ses balcons en fer forgé. Son toit-terrasse transforme les cheminées en sculptures.",
     facts: [
@@ -97,8 +100,13 @@ function openMapOverlay(info) {
 
   overlay.classList.toggle("is-left", isLeft);
   overlay.classList.toggle("is-right", !isLeft);
-  overlay.style.left = isLeft ? "clamp(24px, 5vw, 80px)" : "auto";
-  overlay.style.right = isLeft ? "auto" : "clamp(24px, 5vw, 80px)";
+  overlay.style.top = info.overlayTop || "50%";
+  overlay.style.left = isLeft
+    ? info.overlayOffset || "clamp(24px, 5vw, 80px)"
+    : "auto";
+  overlay.style.right = isLeft
+    ? "auto"
+    : info.overlayOffset || "clamp(24px, 5vw, 80px)";
   overlay.classList.remove("hidden");
   overlay.setAttribute("aria-hidden", "false");
 }

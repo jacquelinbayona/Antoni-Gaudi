@@ -9,31 +9,35 @@ function initOverlay() {
     return;
   }
 
-  // Open overlay
-  openBtn.addEventListener("click", () => {
+  function openOverlay() {
     overlay.classList.remove("hidden");
     overlay.style.opacity = "1";
-  });
+    document.body.classList.add("overlay-open");
+  }
 
-  // Close overlay
-  closeBtn.addEventListener("click", () => {
+  function closeOverlay() {
     overlay.classList.add("hidden");
     overlay.style.opacity = "0";
-  });
+    document.body.classList.remove("overlay-open");
+  }
+
+  // Open overlay
+  openBtn.addEventListener("click", openOverlay);
+
+  // Close overlay
+  closeBtn.addEventListener("click", closeOverlay);
 
   // Close when clicking on overlay background
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay) {
-      overlay.classList.add("hidden");
-      overlay.style.opacity = "0";
+      closeOverlay();
     }
   });
 
   // Close on Escape key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !overlay.classList.contains("hidden")) {
-      overlay.classList.add("hidden");
-      overlay.style.opacity = "0";
+      closeOverlay();
     }
   });
 }

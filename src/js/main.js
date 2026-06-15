@@ -193,9 +193,9 @@ masterTL.to(
 masterTL.fromTo("#map-title", { y: -20 }, { y: 0 }, 0.28);
 
 // ── Phase 3: draw the metro path with station stops ──
-const drawStart = 0.285;
+const drawStart = 0.31;
 const drawStops = [
-  { progress: stationPathProgress[0], travel: 0.018, hold: 0.064 },
+  { progress: stationPathProgress[0], travel: 0.045, hold: 0.11 },
   { progress: stationPathProgress[1], travel: 0.14, hold: 0.07 },
   { progress: stationPathProgress[2], travel: 0.14, hold: 0.07 },
   { progress: stationPathProgress[3], travel: 0.14, hold: 0.055 },
@@ -212,14 +212,16 @@ drawStops.forEach((stop) => {
     {
       progress: stop.progress,
       duration: stop.travel,
-      ease: "power3.out",
+      ease: "none",
       onUpdate: updateDrawnPath,
     },
     drawCursor,
   );
   stationArrivals.push(drawCursor + stop.travel);
   drawCursor += stop.travel;
-  stationOverlayStarts.push(drawCursor + 0.018);
+  stationOverlayStarts.push(
+    drawCursor + (stationOverlayStarts.length === 0 ? 0.065 : 0.018),
+  );
 
   masterTL.to(
     pathDraw,
@@ -256,14 +258,24 @@ masterTL.to("#dashed-path", { opacity: 1, duration: 0.05 }, 0.315);
     extras: ["#pulse-palau", "#dot-3", "#lbl-3"],
   },
 ].forEach((station, index) => {
-  masterTL.set(
+  masterTL.to(
     station.building,
-    { opacity: 0.85, pointerEvents: "auto" },
+    {
+      opacity: 0.85,
+      pointerEvents: "auto",
+      duration: index === 0 ? 0.035 : 0.02,
+      ease: "none",
+    },
     stationArrivals[index],
   );
-  masterTL.set(
+  masterTL.to(
     station.extras,
-    { opacity: 1, pointerEvents: "auto" },
+    {
+      opacity: 1,
+      pointerEvents: "auto",
+      duration: index === 0 ? 0.035 : 0.02,
+      ease: "none",
+    },
     stationArrivals[index],
   );
   masterTL.call(

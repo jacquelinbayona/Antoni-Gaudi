@@ -9,8 +9,25 @@
   --white: #f2ead8;
   --terracotta: #c4622d;
   --mosaic-gold: #ffde21;
+  --building-accent: #e8803a;
   --dark-blue: #1a3f8f;
   --sage: #3a6b4a;
+}
+
+body[data-audio-page="sagradafamilia"] {
+  --building-accent: #e8803a;
+}
+
+body[data-audio-page="casabatllo"] {
+  --building-accent: #7ab8ea;
+}
+
+body[data-audio-page="parcguell"] {
+  --building-accent: #3f8d77;
+}
+
+body[data-audio-page="lapedrera"] {
+  --building-accent: #ffde21;
 }
 
 @font-face {
@@ -30,6 +47,10 @@ body[data-station] {
   color: var(--white);
   font-family: "DM Sans", sans-serif;
   overflow-x: hidden;
+}
+
+body.overlay-open {
+  overflow: hidden;
 }
 h2 {
   font-family: "Eckmania", serif;
@@ -85,8 +106,8 @@ a {
 }
 
 .back-btn:hover {
-  color: var(--terracotta);
-  border-color: var(--terracotta);
+  color: var(--building-accent);
+  border-color: var(--building-accent);
 }
 
 .building-header h2 {
@@ -94,7 +115,7 @@ a {
   font-size: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--mosaic-gold);
+  color: var(--building-accent);
 }
 
 /* ──────────────────────────────────
@@ -144,9 +165,10 @@ a {
 }
 
 .audio-btn.playing {
-  --action-stroke: rgba(255, 222, 33, 0.78);
+  --action-stroke: color-mix(in srgb, var(--building-accent) 78%, transparent);
   border-color: var(--action-stroke);
-  box-shadow: 0 0 0 4px rgba(255, 222, 33, 0.08);
+  box-shadow: 0 0 0 4px
+    color-mix(in srgb, var(--building-accent) 10%, transparent);
 }
 
 .audio-btn {
@@ -166,7 +188,7 @@ a {
   top: 0;
   width: 3px;
   height: 0%;
-  background: linear-gradient(180deg, var(--terracotta), var(--mosaic-gold));
+  background: var(--building-accent);
   z-index: 9000;
   transition: height 0.1s;
 }
@@ -263,7 +285,7 @@ a {
   font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--mosaic-gold);
+  color: var(--building-accent);
   margin: 0;
 }
 
@@ -288,35 +310,32 @@ a {
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(360px, 520px) minmax(360px, 1fr);
-  grid-template-areas:
-    "title image"
-    "text image"
-    "facts image";
+  grid-template-areas: "copy image";
   column-gap: clamp(80px, 12vw, 170px);
-  row-gap: 28px;
+  row-gap: 0;
   align-content: center;
   align-items: center;
 }
 
-.building-info > h2,
-.building-info > p,
-.facts-grid {
+.building-copy {
+  grid-area: copy;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   max-width: 100%;
 }
 
-.building-info h2 {
-  grid-area: title;
+.building-copy h2 {
   font-family: "Eckmania", serif;
   font-size: clamp(2.7rem, 4vw, 4.05rem);
   font-weight: 400;
   line-height: 0.86;
   letter-spacing: 0;
   color: var(--white);
-  margin: 0;
+  margin: 0 0 28px;
 }
 
-.building-info > p {
-  grid-area: text;
+.building-copy > p {
   max-width: 520px;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: clamp(0.9rem, 1.16vw, 1.16rem);
@@ -324,18 +343,18 @@ a {
   line-height: 1.28;
   letter-spacing: 0;
   color: #fff1b8;
-  margin: 0;
+  margin: 0 0 34px;
 }
 
 /* ──────────────────────────────────
    FACTS GRID
 ────────────────────────────────────── */
 .facts-grid {
-  grid-area: facts;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(32px, 5vw, 70px);
-  margin: 12px 0 0;
+  width: 100%;
+  margin: 0;
   padding: 0;
   border: 0;
 }
@@ -351,7 +370,7 @@ a {
   line-height: 1;
   letter-spacing: 0;
   text-transform: none;
-  color: var(--mosaic-gold);
+  color: var(--building-accent);
   margin: 0 0 26px;
 }
 
@@ -427,11 +446,13 @@ a {
 .overlay {
   position: fixed;
   inset: 0;
-  background: #07060c;
+  background: rgba(7, 6, 12, 0.72);
   z-index: 200;
   display: none;
-  overflow-y: auto;
+  overflow: hidden;
   opacity: 0;
+  padding: clamp(24px, 5vh, 56px) clamp(18px, 5vw, 72px);
+  backdrop-filter: blur(10px);
   transition: opacity 0.3s ease;
 }
 
@@ -440,22 +461,29 @@ a {
 }
 
 .overlay:not(.hidden) {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .overlay-content {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: clamp(90px, 12vh, 150px) 40px 120px;
-  width: 100%;
-  min-height: 100vh;
+  max-width: min(1040px, 100%);
+  max-height: min(820px, calc(100svh - clamp(48px, 10vh, 112px)));
+  margin: 0;
+  padding: clamp(54px, 7vh, 82px) clamp(28px, 5vw, 72px)
+    clamp(46px, 6vh, 72px);
+  width: min(1040px, 100%);
+  overflow-y: auto;
   text-align: center;
+  background: rgba(7, 6, 12, 0.94);
+  border: 1.5px solid color-mix(in srgb, var(--building-accent) 72%, transparent);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.48);
 }
 
 .close-overlay {
-  position: fixed;
-  top: 28px;
-  right: 34px;
+  position: absolute;
+  top: clamp(34px, 6vh, 66px);
+  right: clamp(28px, 6vw, 84px);
   background: none;
   border: none;
   color: rgba(242, 234, 216, 0.45);
@@ -467,7 +495,7 @@ a {
 }
 
 .close-overlay:hover {
-  color: var(--terracotta);
+  color: var(--building-accent);
 }
 
 .overlay-content h1 {
@@ -478,9 +506,14 @@ a {
   letter-spacing: 0;
   white-space: nowrap;
   text-transform: uppercase;
-  color: #f07b2d;
-  margin: 0 auto clamp(90px, 12vh, 130px);
+  color: var(--building-accent);
+  margin: 0 auto clamp(48px, 7vh, 78px);
   max-width: 1600px;
+}
+
+body[data-audio-page="sagradafamilia"] .overlay-content h1 {
+  font-size: clamp(2rem, 5.7vw, 5.9rem);
+  text-align: center;
 }
 
 .overlay-content > p.intro {
@@ -490,12 +523,12 @@ a {
   font-weight: 400;
   line-height: 1.32;
   color: rgba(242, 240, 239, 0.82);
-  margin: 0 auto clamp(86px, 10vh, 118px);
+  margin: 0 auto clamp(44px, 6vh, 70px);
   max-width: 780px;
 }
 
 .overlay-content section {
-  margin: 0 auto clamp(78px, 9vh, 108px);
+  margin: 0 auto clamp(42px, 6vh, 68px);
   max-width: 800px;
 }
 
@@ -505,7 +538,7 @@ a {
   font-weight: 800;
   letter-spacing: 0;
   text-transform: uppercase;
-  color: rgba(196, 98, 45, 0.82);
+  color: var(--building-accent);
   margin: 0 0 26px;
 }
 
@@ -544,7 +577,7 @@ a {
 }
 
 .stats-grid > div {
-  border-color: rgba(240, 123, 45, 0.9);
+  border-color: color-mix(in srgb, var(--building-accent) 88%, transparent);
   border-style: solid;
   border-width: 0;
 }
@@ -587,30 +620,26 @@ a {
   .building-info {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "title"
-      "image"
-      "text"
-      "facts";
+      "copy"
+      "image";
     row-gap: 28px;
     min-height: auto;
   }
 
-  .building-info > h2,
-  .building-info > p,
-  .facts-grid,
+  .building-copy,
   .building-image {
     grid-column: auto;
   }
 
   .building-image {
-    margin-top: 10px;
+    margin: 0;
   }
 
   .building-image img {
     max-width: min(420px, 78vw);
   }
 
-  .building-info > p {
+  .building-copy > p {
     max-width: 680px;
   }
 }
@@ -640,7 +669,7 @@ a {
     line-height: 0.86;
   }
 
-  .building-info > p {
+  .building-copy > p {
     font-size: 1rem;
     line-height: 1.32;
   }
@@ -723,17 +752,15 @@ body[data-station] {
   }
   .building-info {
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 24px;
   }
-  .building-info > h2,
-  .building-info > p,
-  .facts-grid,
+  .building-copy,
   .building-image {
     grid-column: 1;
   }
   .building-image {
     grid-row: auto;
-    margin-top: 10px;
+    margin: 0;
   }
   .building-image img {
     max-width: 300px;
@@ -797,10 +824,10 @@ body[data-station] {
   .building-info h2 {
     font-size: 2.25rem;
   }
-  .building-info > p {
+  .building-copy > p {
     font-size: 13px;
     line-height: 1.7;
-    margin-bottom: 18px;
+    margin-bottom: 30px;
   }
   .overlay-content {
     padding: 76px 20px 40px;
@@ -822,7 +849,7 @@ body[data-station] {
   .facts-grid {
     grid-template-columns: 1fr;
     gap: 18px;
-    margin: 24px 0;
+    margin: 0;
     padding: 28px 0;
   }
   .facts p {
