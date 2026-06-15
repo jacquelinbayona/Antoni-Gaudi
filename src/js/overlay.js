@@ -10,41 +10,18 @@ function initOverlay() {
   }
 
   function openOverlay() {
-    overlay.classList.remove("hidden");
-    overlay.style.opacity = "1";
+    showOverlay(overlay);
     document.body.classList.add("overlay-open");
   }
 
   function closeOverlay() {
-    overlay.classList.add("hidden");
-    overlay.style.opacity = "0";
+    hideOverlay(overlay);
     document.body.classList.remove("overlay-open");
   }
 
-  // Open overlay
   openBtn.addEventListener("click", openOverlay);
-
-  // Close overlay
   closeBtn.addEventListener("click", closeOverlay);
-
-  // Close when clicking on overlay background
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) {
-      closeOverlay();
-    }
-  });
-
-  // Close on Escape key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !overlay.classList.contains("hidden")) {
-      closeOverlay();
-    }
-  });
+  bindOverlayDismiss(overlay, closeOverlay);
 }
 
-// Initialize when DOM is ready
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initOverlay);
-} else {
-  initOverlay();
-}
+onReady(initOverlay);

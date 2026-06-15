@@ -1,26 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 @import url("https://use.typekit.net/sry8rql.css");
-
-@font-face {
-  font-family: "Eckmania";
-  src: url("../assets/fonts/00 Eckmania Display Non-Commercial/00EckmaniaDisplayNon-Commercial-Regular.otf")
-    format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-:root {
-  --white: #f2f0ef;
-  --terracotta: #c4622d;
-  --red: #ff2c2c;
-  --mosaic-blue: #005cbd;
-  --mosaic-gold: #ffde21;
-  --night: #060709;
-  --night2: #141820;
-  --gaudi-green: #50c878;
-  --stone: #8a8070;
-  --wagon-grey: #b8c4d0;
-}
+@import "variables.css";
 
 *,
 *::before,
@@ -185,9 +165,6 @@ body {
     0 0 0 4px rgba(255, 210, 50, 0.95);
 }
 
-.trencadis-btn:focus {
-  outline: 3px solid rgba(255, 255, 255, 0.12);
-}
 .trencadis-btn:focus {
   outline: 3px solid rgba(255, 255, 255, 0.12);
 }

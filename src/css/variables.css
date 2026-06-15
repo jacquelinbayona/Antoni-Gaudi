@@ -1,0 +1,62 @@
+/* ══════════════════════════════════
+   DESIGN TOKENS — single source of truth
+   Imported by main.css and buildings.css
+══════════════════════════════════ */
+
+:root {
+  --white: #f2f0ef;
+  --terracotta: #c4622d;
+  --red: #ff2c2c;
+  --mosaic-blue: #005cbd;
+  --mosaic-gold: #ffde21;
+  --night: #060709;
+  --night2: #141820;
+  --gaudi-green: #50c878;
+  --stone: #8a8070;
+  --wagon-grey: #b8c4d0;
+  --dark-blue: #1a3f8f;
+  --sage: #3a6b4a;
+  --building-accent: #e8803a;
+}
+
+/* Building pages override a subset of tokens */
+body[data-station] {
+  --night: #0a0a0a;
+  --white: #f2ead8;
+}
+
+/* Per-building accent colours */
+body[data-audio-page="sagradafamilia"] {
+  --building-accent: #e8803a;
+}
+
+body[data-audio-page="casabatllo"] {
+  --building-accent: #7ab8ea;
+}
+
+body[data-audio-page="parcguell"] {
+  --building-accent: #3f8d77;
+}
+
+body[data-audio-page="lapedrera"] {
+  --building-accent: #ffde21;
+}
+
+/* ── SHARED FONT FACES ── */
+@font-face {
+  font-family: "Eckmania";
+  src: url("../assets/fonts/00 Eckmania Display Non-Commercial/00EckmaniaDisplayNon-Commercial-Regular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Eckmania";
+  src: url("../assets/fonts/00 Eckmania Display Non-Commercial/00EckmaniaDisplayNon-Commercial-Bold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

@@ -4,40 +4,8 @@
    - Individual building pages
 ════════════════════════════════════ */
 
-:root {
-  --night: #0a0a0a;
-  --white: #f2ead8;
-  --terracotta: #c4622d;
-  --mosaic-gold: #ffde21;
-  --building-accent: #e8803a;
-  --dark-blue: #1a3f8f;
-  --sage: #3a6b4a;
-}
-
-body[data-audio-page="sagradafamilia"] {
-  --building-accent: #e8803a;
-}
-
-body[data-audio-page="casabatllo"] {
-  --building-accent: #7ab8ea;
-}
-
-body[data-audio-page="parcguell"] {
-  --building-accent: #3f8d77;
-}
-
-body[data-audio-page="lapedrera"] {
-  --building-accent: #ffde21;
-}
-
-@font-face {
-  font-family: "Eckmania";
-  src: url("../../assets/fonts/00 Eckmania Display Non-Commercial/00EckmaniaDisplayNon-Commercial-Bold.otf")
-    format("opentype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+/* Variables, @font-face, building-accent overrides, etc.
+   live in ../variables.css (imported by main.css) */
 
 /* ──────────────────────────────────
    PAGE WRAPPER
@@ -193,21 +161,19 @@ a {
   transition: height 0.1s;
 }
 
-/* ──────────────────────────────────
-   GAUDI TILE PATTERN BG for MAP
-────────────────────────────────────── */
+/* .tile-bg merged into .background-pattern (same gradient, absolute variant) */
 .tile-bg {
   position: absolute;
   inset: 0;
   background-image:
     radial-gradient(
       circle at 0% 0%,
-      rgba(196, 98, 45, 0.04) 0%,
+      rgba(196, 98, 45, 0.03) 0%,
       transparent 50%
     ),
     radial-gradient(
       circle at 100% 100%,
-      rgba(26, 63, 143, 0.04) 0%,
+      rgba(26, 63, 143, 0.03) 0%,
       transparent 50%
     );
 }
@@ -563,6 +529,7 @@ body[data-audio-page="sagradafamilia"] .overlay-content h1 {
   border-top: 0;
 }
 
+.stats-item,
 .stats-item1,
 .stats-item2,
 .stats-item3,
