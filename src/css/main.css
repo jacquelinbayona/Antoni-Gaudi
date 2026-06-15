@@ -327,9 +327,11 @@ body::after {
   transform-origin: center center;
   overflow: hidden;
   display: flex;
-  justify-content: center;
+  justify-content: end;
+  transform: translateX(-20px);
   align-items: center;
   width: 100%;
+  scale: 1.3;
 }
 
 #wagon-svg {

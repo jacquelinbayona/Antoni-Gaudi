@@ -100,10 +100,21 @@ const masterTL = gsap.timeline({
 masterTL.to(
   "#wagon-wrap",
   {
-    scale: 14,
     y: "8vh",
+    x: "-1000px",
     duration: 0.22,
     ease: "power2.in",
+  },
+  0,
+);
+
+// fade out du wagon
+masterTL.to(
+  "#wagon-wrap",
+  {
+    opacity: 0,
+    duration: 0.22,
+    ease: "power2.out",
   },
   0,
 );
