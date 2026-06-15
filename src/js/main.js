@@ -5,11 +5,14 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
    PROGRESS BAR
 ───────────────────────────── */
 const progressLine = document.getElementById("progress-line");
-window.addEventListener("scroll", () => {
-  const pct =
-    (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-  progressLine.style.height = pct + "%";
-});
+if (progressLine) {
+  window.addEventListener("scroll", () => {
+    const scrollable = document.body.scrollHeight - window.innerHeight;
+    if (scrollable <= 0) return;
+    const pct = (window.scrollY / scrollable) * 100;
+    progressLine.style.height = pct + "%";
+  });
+}
 
 /* ─────────────────────────────
    TUNNEL ARCHES — animate scale
@@ -79,7 +82,9 @@ function syncPathWagonToLine() {
     Math.min(drawnPathLength, drawnPathLength - dashOffset),
   );
   const svgPoint = drawnPath.getPointAtLength(visibleLength);
-  const screenPoint = svgPoint.matrixTransform(drawnPath.getScreenCTM());
+  const ctm = drawnPath.getScreenCTM();
+  if (!ctm) return;
+  const screenPoint = svgPoint.matrixTransform(ctm);
   const sceneRect = mapScene.getBoundingClientRect();
 
   gsap.set(pathWagon, {

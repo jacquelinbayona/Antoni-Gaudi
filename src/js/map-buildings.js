@@ -90,11 +90,22 @@ function openMapOverlay(info) {
   activeMapOverlay = overlay;
   const isLeft = info.overlaySide === "left";
 
-  overlay.querySelector(".map-info-date").textContent = info.date;
-  overlay.querySelector("h2").textContent = info.title;
-  overlay.querySelector(".map-info-text").textContent = info.text;
-  overlay.querySelector(".map-info-link").href = info.pageUrl;
-  overlay.querySelector(".map-info-facts").innerHTML = info.facts
+  const dateEl = overlay.querySelector(".map-info-date");
+  const titleEl = overlay.querySelector("h2");
+  const textEl = overlay.querySelector(".map-info-text");
+  const linkEl = overlay.querySelector(".map-info-link");
+  const factsEl = overlay.querySelector(".map-info-facts");
+
+  if (!dateEl || !titleEl || !textEl || !linkEl || !factsEl) {
+    console.error("Map overlay is missing expected child elements");
+    return;
+  }
+
+  dateEl.textContent = info.date;
+  titleEl.textContent = info.title;
+  textEl.textContent = info.text;
+  linkEl.href = info.pageUrl;
+  factsEl.innerHTML = info.facts
     .map(([label, value]) => `<section><h3>${label}</h3><p>${value}</p></section>`)
     .join("");
 
