@@ -839,3 +839,24 @@ body::after {
       transparent 50%
     );
 }
+
+/* ──────────────────────────────────
+   CLICKABLE BUILDINGS (MAP)
+────────────────────────────────────── */
+#bld-batllo,
+#bld-palau,
+#bld-guell,
+#bld-sagrada {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#bld-batllo:hover,
+#bld-palau:hover,
+#bld-guell:hover,
+#bld-sagrada:hover {
+  opacity: 1 !important;
+  filter: url(#glow-f) !important;
+  transform: scale(1.05);
+  transform-origin: center;
+}

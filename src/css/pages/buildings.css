@@ -1,5 +1,7 @@
 /* ══════════════════════════════════
-   GENERIC STYLES FOR ALL BUILDING PAGES
+   COMBINED BUILDING STYLES
+   - Map overlay/detail panel
+   - Individual building pages
 ════════════════════════════════════ */
 
 :root {
@@ -11,7 +13,9 @@
   --sage: #3a6b4a;
 }
 
-/* ──── PAGE WRAPPER ──── */
+/* ──────────────────────────────────
+   PAGE WRAPPER
+────────────────────────────────────── */
 body[data-station] {
   background: var(--night);
   color: var(--white);
@@ -40,7 +44,9 @@ h2 {
   z-index: -1;
 }
 
-/* ──── HEADER ──── */
+/* ──────────────────────────────────
+   HEADER
+────────────────────────────────────── */
 .building-header {
   position: sticky;
   top: 0;
@@ -80,7 +86,9 @@ h2 {
   color: var(--mosaic-gold);
 }
 
-/* ──── FLOATING ACTIONS ──── */
+/* ──────────────────────────────────
+   FLOATING ACTIONS
+────────────────────────────────────── */
 .floating-actions {
   position: fixed;
   right: 40px;
@@ -122,14 +130,171 @@ h2 {
   box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.18);
 }
 
-/* ──── MAIN BUILDING PAGE ──── */
+/* ──────────────────────────────────
+   PROGRESS LINE
+────────────────────────────────────── */
+#progress-line {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 0%;
+  background: linear-gradient(180deg, var(--terracotta), var(--mosaic-gold));
+  z-index: 9000;
+  transition: height 0.1s;
+}
+
+/* ──────────────────────────────────
+   GAUDI TILE PATTERN BG for MAP
+────────────────────────────────────── */
+.tile-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(196, 98, 45, 0.04) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(26, 63, 143, 0.04) 0%,
+      transparent 50%
+    );
+}
+
+/* ══════════════════════════════════
+   DETAIL OVERLAY (MAP MODAL)
+════════════════════════════════════ */
+#detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--night);
+  overflow-y: auto;
+  z-index: 200;
+}
+
+.detail-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 120px 60px;
+}
+
+.detail-left {
+  padding: 60px 48px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid rgba(242, 234, 216, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-left::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 30% 70%,
+    rgba(196, 98, 45, 0.07) 0%,
+    transparent 70%
+  );
+}
+
+.detail-tag {
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 20px;
+}
+
+.detail-title {
+  font-family: "Cormorant Garamond", serif;
+  text-align: center;
+  font-weight: 300;
+  font-size: clamp(5rem, 10vw, 10rem);
+}
+
+.detail-section {
+  margin-top: 80px;
+}
+
+.detail-year {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--mosaic-gold);
+  margin-bottom: 32px;
+}
+
+.detail-desc {
+  font-size: 13px;
+  line-height: 1.95;
+  color: rgba(242, 234, 216, 0.65);
+  max-width: 420px;
+  margin-bottom: 40px;
+}
+
+.detail-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(242, 234, 216, 0.08);
+}
+
+.fact-label {
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--mosaic-gold);
+  margin-bottom: 5px;
+}
+
+.fact-val {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  color: var(--white);
+}
+
+.detail-nav {
+  position: absolute;
+  top: 28px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+}
+
+.detail-close {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(242, 234, 216, 0.35);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: "DM Mono", monospace;
+  transition: color 0.2s;
+}
+
+.detail-close:hover {
+  color: var(--terracotta);
+}
+
+/* ──────────────────────────────────
+   BUILDING PAGE LAYOUT
+────────────────────────────────────── */
 .building-page {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0;
 }
 
-/* ──── HERO SECTION ──── */
+/* ──────────────────────────────────
+   HERO SECTION
+────────────────────────────────────── */
 .hero {
   min-height: 60vh;
   display: flex;
@@ -192,7 +357,9 @@ h2 {
   margin: 0;
 }
 
-/* ──── BUILDING CONTENT ──── */
+/* ──────────────────────────────────
+   BUILDING CONTENT
+────────────────────────────────────── */
 .building-content {
   padding: 80px 40px;
   background: rgba(26, 63, 143, 0.02);
@@ -227,7 +394,9 @@ h2 {
   margin-bottom: 40px;
 }
 
-/* ──── FACTS GRID ──── */
+/* ──────────────────────────────────
+   FACTS GRID
+────────────────────────────────────── */
 .facts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -258,7 +427,9 @@ h2 {
   margin: 0;
 }
 
-/* ──── BUILDING IMAGE ──── */
+/* ──────────────────────────────────
+   BUILDING IMAGE
+────────────────────────────────────── */
 .building-image {
   grid-column: 2;
   grid-row: 1 / span 4;

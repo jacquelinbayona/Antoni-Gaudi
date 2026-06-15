@@ -14,6 +14,7 @@
     <script src="./js/cursor.js"></script>
     <script src="./js/stations.js"></script>
     <script src="./js/audio-player.js"></script>
+    <script src="./js/overlay.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="./css/layout.css" />
@@ -194,31 +195,6 @@
       </div>
     </div>
 
-    <!-- Script to handle overlay -->
-    <script>
-      const overlay = document.querySelector(".overlay");
-      const openBtn = document.getElementById("openOverlay");
-      const closeBtn = document.querySelector(".close-overlay");
-
-      openBtn.addEventListener("click", () => {
-        overlay.classList.remove("hidden");
-      });
-
-      closeBtn.addEventListener("click", () => {
-        overlay.classList.add("hidden");
-      });
-
-      overlay.addEventListener("click", (e) => {
-        if (e.target === overlay) {
-          overlay.classList.add("hidden");
-        }
-      });
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          overlay.classList.add("hidden");
-        }
-      });
-    </script>
+    <!-- Script to handle overlay is loaded via js/overlay.js -->
   </body>
 </html>
