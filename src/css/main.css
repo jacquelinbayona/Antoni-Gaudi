@@ -542,6 +542,12 @@ body::after {
   pointer-events: auto;
   white-space: nowrap;
   cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+.st-label:hover,
+.st-label:focus {
+  text-decoration: none;
 }
 .st-label-inner {
   background: rgba(12, 15, 20, 0.88);
