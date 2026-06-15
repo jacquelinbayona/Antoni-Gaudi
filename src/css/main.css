@@ -287,7 +287,7 @@ body::after {
 /* ── WAGON WRAPPER ── */
 #wagon-wrap {
   position: relative;
-  z-index: 20;
+  z-index: 0;
   transform-origin: center center;
   overflow: hidden;
   display: flex;
@@ -405,9 +405,9 @@ body::after {
 /* ── INTRO LABEL ── */
 #intro-label {
   position: absolute;
-  top: 50%;
+  top: 15%;
   left: 50%;
-  transform: translate(-50%, calc(-25% - 205px));
+  transform: translateX(-50%);
   display: flex;
   align-items: baseline;
   justify-content: center;
@@ -512,6 +512,7 @@ body::after {
 
 /* ── STATION DOTS & LABELS ── */
 .st-dot {
+  display: none !important;
   position: absolute;
   width: 18px;
   height: 18px;
@@ -650,7 +651,8 @@ body::after {
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    transform: translate(-50%, calc(-25% - 150px));
+    top: 16%;
+    transform: translateX(-50%);
     width: min(92vw, 640px);
   }
 
@@ -712,7 +714,8 @@ body::after {
   }
 
   #intro-label {
-    transform: translate(-50%, calc(-25% - 118px));
+    top: 18%;
+    transform: translateX(-50%);
     width: 92vw;
   }
 

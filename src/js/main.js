@@ -145,8 +145,8 @@ masterTL.to(
     motionPath: {
       path: "#metro-motion-path",
       align: "#metro-motion-path",
-      alignOrigin: [0.5, 0.8],
-      autoRotate: true,
+      alignOrigin: [0.5, 0.5],
+      autoRotate: false,
       start: 0,
       end: 1,
     },
