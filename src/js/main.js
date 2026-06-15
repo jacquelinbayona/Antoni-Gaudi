@@ -12,67 +12,6 @@ window.addEventListener("scroll", () => {
 });
 
 /* ─────────────────────────────
-   BUILD MOSAIC GRID
-───────────────────────────── */
-function buildMosaic(colors) {
-  const grid = document.getElementById("d-mosaic");
-  grid.innerHTML = "";
-  const cols = 18,
-    rows = 22;
-  grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-  grid.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
-  for (let i = 0; i < cols * rows; i++) {
-    const c = colors[Math.floor(Math.random() * colors.length)];
-    const cell = document.createElement("div");
-    cell.className = "mosaic-cell";
-    cell.style.background = c;
-    cell.style.opacity = (0.15 + Math.random() * 0.45).toFixed(2);
-    cell.style.margin = "1px";
-    grid.appendChild(cell);
-  }
-}
-
-/* ─────────────────────────────
-   STATION DETAIL
-───────────────────────────── */
-let currentStation = 0;
-
-function openStation(i) {
-  currentStation = i;
-  const s = STATIONS[i];
-  document.getElementById("d-tag").textContent = s.tag;
-  document.getElementById("d-title").textContent = s.title;
-  document.getElementById("d-year").textContent = s.year;
-  document.getElementById("d-desc").textContent = s.desc;
-  document.getElementById("d-archi").textContent = s.archi;
-  document.getElementById("d-style").textContent = s.style;
-  document.getElementById("d-height").textContent = s.height;
-  document.getElementById("d-class").textContent = s.classement;
-  document.getElementById("d-icon").textContent = s.icon;
-  buildMosaic(s.colors);
-  document.getElementById("detail-overlay").classList.add("open");
-  // mark dot
-  document
-    .querySelectorAll(".st-dot")
-    .forEach((d, j) => d.classList.toggle("active", j === i));
-}
-function closeStation() {
-  document.getElementById("detail-overlay").classList.remove("open");
-}
-function nextStation() {
-  openStation((currentStation + 1) % 4);
-}
-function prevStation() {
-  openStation((currentStation + 3) % 4);
-}
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeStation();
-  if (e.key === "ArrowRight") nextStation();
-  if (e.key === "ArrowLeft") prevStation();
-});
-
-/* ─────────────────────────────
    TUNNEL ARCHES — animate scale
 ───────────────────────────── */
 gsap.to(".tunnel-arch", {
