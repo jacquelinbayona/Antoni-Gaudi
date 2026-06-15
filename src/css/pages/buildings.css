@@ -59,7 +59,9 @@ h2 {
   backdrop-filter: none;
   border-bottom: none;
 }
-
+a {
+  text-decoration: none;
+}
 .back-btn {
   color: #47a2ff;
   text-align: center;
