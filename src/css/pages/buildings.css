@@ -802,7 +802,6 @@ body[data-station] {
     grid-template-columns: 1fr;
   }
 }
-<<<<<<< HEAD
 
 /* Text reveal animation */
 .reveal-word-mask {
@@ -837,5 +836,3 @@ body[data-station] {
   transform: translateY(0);
   filter: blur(0);
 }
-=======
->>>>>>> f989f160231dcbe6edb8013d42500d45472c5a36
