@@ -643,3 +643,110 @@ body::after {
   transform: scale(1.05);
   transform-origin: center;
 }
+
+/* Homepage responsive refinements */
+@media (max-width: 900px) {
+  #intro-label {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transform: translate(-50%, calc(-25% - 150px));
+    width: min(92vw, 640px);
+  }
+
+  #intro-label h1 {
+    font-size: 86px;
+    letter-spacing: 0;
+  }
+
+  #wagon-wrap {
+    justify-content: center;
+    transform: none;
+    scale: 1;
+  }
+
+  #wagon-svg {
+    width: min(112vw, 900px);
+    max-width: none;
+  }
+
+  #lang-switch {
+    top: 14px;
+    right: 14px;
+    gap: 8px;
+  }
+
+  .trencadis-btn {
+    width: 58px;
+    height: 42px;
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 520px) {
+  body { cursor: auto; }
+  #cursor { display: none; }
+  #homepage-credit {
+    left: 12px;
+    bottom: 12px;
+    max-width: 220px;
+    font-size: 8px;
+    line-height: 1.25;
+  }
+
+  #lang-switch {
+    left: 12px;
+    right: 12px;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  .trencadis-btn {
+    width: 45px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  #intro-label {
+    transform: translate(-50%, calc(-25% - 118px));
+    width: 92vw;
+  }
+
+  #intro-label h1 {
+    font-size: 52px;
+    line-height: 0.9;
+  }
+
+  #intro-label h1:last-child {
+    letter-spacing: 2px;
+  }
+
+  #wagon-svg {
+    width: 150vw;
+  }
+
+  #scroll-hint {
+    bottom: 28px;
+    width: 90vw;
+  }
+
+  #scroll-hint p {
+    letter-spacing: 2px;
+  }
+
+  #map-title {
+    top: 84px;
+    width: 90vw;
+    white-space: normal;
+  }
+
+  #map-title h2 {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+
+  #map-title p {
+    letter-spacing: 2px;
+  }
+}
+
