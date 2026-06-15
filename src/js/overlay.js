@@ -44,3 +44,7 @@ if (document.readyState === "loading") {
 } else {
   initOverlay();
 }
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { initOverlay };
+}

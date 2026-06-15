@@ -22,3 +22,7 @@ function initAudioGuide() {
 }
 
 document.addEventListener("DOMContentLoaded", initAudioGuide);
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { initAudioGuide };
+}
