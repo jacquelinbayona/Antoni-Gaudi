@@ -578,6 +578,121 @@ body::after {
   color: rgba(242, 234, 216, 0.5);
 }
 
+/* ── MAP INFO OVERLAY ── */
+.map-info-overlay {
+  position: absolute;
+  top: 50%;
+  z-index: 90;
+  width: min(420px, calc(100vw - 48px));
+  transform: translateY(-50%);
+  pointer-events: auto;
+  background: rgba(7, 6, 12, 0.92);
+  border: 1.5px solid rgba(132, 122, 91, 0.78);
+  color: var(--white);
+  padding: 34px 34px 30px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+}
+
+.map-info-overlay.is-right {
+  right: clamp(24px, 5vw, 80px);
+  left: auto;
+}
+
+.map-info-overlay.is-left {
+  left: clamp(24px, 5vw, 80px);
+  right: auto;
+}
+
+.map-info-overlay.hidden {
+  display: none;
+}
+
+.map-info-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  border: 0;
+  background: transparent;
+  color: rgba(242, 234, 216, 0.62);
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.map-info-date {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--mosaic-gold);
+  margin: 0 0 18px;
+}
+
+.map-info-content h2 {
+  font-family: "Eckmania", serif;
+  font-size: clamp(2.6rem, 4vw, 4.25rem);
+  font-weight: 700;
+  line-height: 0.9;
+  color: #f07b2d;
+  margin: 0 0 26px;
+}
+
+.map-info-text {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(242, 240, 239, 0.82);
+  margin: 0 0 28px;
+}
+
+.map-info-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.map-info-facts h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgba(242, 240, 239, 0.52);
+  margin: 0 0 8px;
+}
+
+.map-info-facts p {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.map-info-link {
+  display: inline-flex;
+  justify-content: center;
+  min-width: 230px;
+  padding: 14px 18px;
+  border: 1.5px solid rgba(132, 122, 91, 0.78);
+  border-radius: 999px;
+  color: var(--white);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.map-info-link:hover,
+.map-info-link:focus {
+  border-color: rgba(242, 234, 216, 0.82);
+}
+
 /* ── STATION COUNTER ── */
 #station-counter {
   position: absolute;

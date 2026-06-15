@@ -35,6 +35,104 @@ const masterTL = gsap.timeline({
   },
 });
 
+const drawnPath = document.getElementById("drawn-path");
+const pathWagon = document.getElementById("path-wagon");
+const mapScene = document.getElementById("map-scene");
+let drawnPathLength = 0;
+const pathDraw = { progress: 0 };
+const stationCoords = [
+  { x: 720, y: 180 },
+  { x: 340, y: 290 },
+  { x: 160, y: 130 },
+  { x: 560, y: 420 },
+];
+let stationPathProgress = [0, 0.36, 0.58, 1];
+
+function getClosestPathProgress(x, y) {
+  if (!drawnPath || !drawnPathLength) return 0;
+
+  let closestLength = 0;
+  let closestDistance = Number.POSITIVE_INFINITY;
+  const samples = 260;
+
+  for (let i = 0; i <= samples; i += 1) {
+    const sampleLength = (drawnPathLength * i) / samples;
+    const point = drawnPath.getPointAtLength(sampleLength);
+    const distance = Math.hypot(point.x - x, point.y - y);
+
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestLength = sampleLength;
+    }
+  }
+
+  return closestLength / drawnPathLength;
+}
+
+function syncPathWagonToLine() {
+  if (!drawnPath || !pathWagon || !mapScene || !drawnPathLength) return;
+
+  const dashOffset =
+    Number.parseFloat(gsap.getProperty(drawnPath, "strokeDashoffset")) || 0;
+  const visibleLength = Math.max(
+    0,
+    Math.min(drawnPathLength, drawnPathLength - dashOffset),
+  );
+  const svgPoint = drawnPath.getPointAtLength(visibleLength);
+  const screenPoint = svgPoint.matrixTransform(drawnPath.getScreenCTM());
+  const sceneRect = mapScene.getBoundingClientRect();
+
+  gsap.set(pathWagon, {
+    x: screenPoint.x - sceneRect.left,
+    y: screenPoint.y - sceneRect.top,
+    xPercent: -50,
+    yPercent: -50,
+  });
+}
+
+function updateDrawnPath() {
+  if (!drawnPath || !drawnPathLength) return;
+
+  gsap.set(drawnPath, {
+    strokeDashoffset: drawnPathLength * (1 - pathDraw.progress),
+  });
+  syncPathWagonToLine();
+}
+
+if (drawnPath) {
+  drawnPathLength = drawnPath.getTotalLength();
+  gsap.set(drawnPath, {
+    strokeDasharray: drawnPathLength,
+    strokeDashoffset: drawnPathLength,
+  });
+  stationPathProgress = stationCoords
+    .map(({ x, y }) => getClosestPathProgress(x, y))
+    .sort((a, b) => a - b);
+  syncPathWagonToLine();
+}
+
+gsap.set(
+  [
+    "#bld-sagrada",
+    "#bld-batllo",
+    "#bld-guell",
+    "#bld-palau",
+    "#pulse-sagrada",
+    "#pulse-batllo",
+    "#pulse-guell",
+    "#pulse-palau",
+    "#dot-0",
+    "#dot-1",
+    "#dot-2",
+    "#dot-3",
+    "#lbl-0",
+    "#lbl-1",
+    "#lbl-2",
+    "#lbl-3",
+  ],
+  { opacity: 0, pointerEvents: "none" },
+);
+
 // ── Phase 1: zoom into wagon (0% → 22% scroll) ──
 masterTL.to(
   "#wagon-wrap",
@@ -94,74 +192,100 @@ masterTL.to(
 
 masterTL.fromTo("#map-title", { y: -20 }, { y: 0 }, 0.28);
 
-// ── Phase 3: draw the metro path (30% → 55%) ──
-masterTL.to(
-  "#drawn-path",
-  {
-    strokeDashoffset: 0,
-    duration: 0.25,
-    ease: "none",
-  },
-  0.3,
-);
+// ── Phase 3: draw the metro path with station stops ──
+const drawStart = 0.285;
+const drawStops = [
+  { progress: stationPathProgress[0], travel: 0.018, hold: 0.064 },
+  { progress: stationPathProgress[1], travel: 0.14, hold: 0.07 },
+  { progress: stationPathProgress[2], travel: 0.14, hold: 0.07 },
+  { progress: stationPathProgress[3], travel: 0.14, hold: 0.055 },
+];
+const stationBuildingIds = ["bld-sagrada", "bld-batllo", "bld-guell", "bld-palau"];
+let drawCursor = drawStart;
+const stationArrivals = [];
+const stationOverlayStarts = [];
+const stationDepartures = [];
 
-masterTL.to("#dashed-path", { opacity: 1, duration: 0.05 }, 0.34);
-
-// ── Phase 4: reveal buildings along the way ──
-masterTL.to("#bld-sagrada", { opacity: 0.85, duration: 0.06 }, 0.32);
-masterTL.to(
-  ["#pulse-sagrada", "#dot-0", "#lbl-0"],
-  { opacity: 1, duration: 0.05 },
-  0.36,
-);
-
-masterTL.to("#bld-batllo", { opacity: 0.85, duration: 0.06 }, 0.4);
-masterTL.to(
-  ["#pulse-batllo", "#dot-1", "#lbl-1"],
-  { opacity: 1, duration: 0.05 },
-  0.43,
-);
-
-masterTL.to("#bld-guell", { opacity: 0.85, duration: 0.06 }, 0.46);
-masterTL.to(
-  ["#pulse-guell", "#dot-2", "#lbl-2"],
-  { opacity: 1, duration: 0.05 },
-  0.49,
-);
-
-masterTL.to("#bld-palau", { opacity: 0.85, duration: 0.06 }, 0.52);
-masterTL.to(
-  ["#pulse-palau", "#dot-3", "#lbl-3"],
-  { opacity: 1, duration: 0.05 },
-  0.55,
-);
-
-// ── Phase 5: small wagon follows the path (35% → 100%) ──
-masterTL.to("#path-wagon", { opacity: 1, duration: 0.04 }, 0.35);
-
-masterTL.to(
-  "#path-wagon",
-  {
-    motionPath: {
-      path: "#metro-motion-path",
-      align: "#metro-motion-path",
-      alignOrigin: [0.5, 0.5],
-      autoRotate: false,
-      start: 0,
-      end: 1,
+drawStops.forEach((stop) => {
+  masterTL.to(
+    pathDraw,
+    {
+      progress: stop.progress,
+      duration: stop.travel,
+      ease: "power3.out",
+      onUpdate: updateDrawnPath,
     },
-    duration: 0.6,
-    ease: "power1.inOut",
+    drawCursor,
+  );
+  stationArrivals.push(drawCursor + stop.travel);
+  drawCursor += stop.travel;
+  stationOverlayStarts.push(drawCursor + 0.018);
+
+  masterTL.to(
+    pathDraw,
+    {
+      progress: stop.progress,
+      duration: stop.hold,
+      ease: "none",
+      onUpdate: updateDrawnPath,
+    },
+    drawCursor,
+  );
+  stationDepartures.push(drawCursor + stop.hold);
+  drawCursor += stop.hold;
+});
+
+masterTL.to("#dashed-path", { opacity: 1, duration: 0.05 }, 0.315);
+
+// ── Phase 4: reveal buildings and info panels exactly at each stop ──
+[
+  {
+    building: "#bld-sagrada",
+    extras: ["#pulse-sagrada", "#dot-0", "#lbl-0"],
   },
-  0.35,
-);
+  {
+    building: "#bld-batllo",
+    extras: ["#pulse-batllo", "#dot-1", "#lbl-1"],
+  },
+  {
+    building: "#bld-guell",
+    extras: ["#pulse-guell", "#dot-2", "#lbl-2"],
+  },
+  {
+    building: "#bld-palau",
+    extras: ["#pulse-palau", "#dot-3", "#lbl-3"],
+  },
+].forEach((station, index) => {
+  masterTL.set(
+    station.building,
+    { opacity: 0.85, pointerEvents: "auto" },
+    stationArrivals[index],
+  );
+  masterTL.set(
+    station.extras,
+    { opacity: 1, pointerEvents: "auto" },
+    stationArrivals[index],
+  );
+  masterTL.call(
+    () => window.openMapOverlayByBuildingId?.(stationBuildingIds[index]),
+    [],
+    stationOverlayStarts[index],
+  );
+  masterTL.call(
+    () => window.closeMapOverlay?.(),
+    [],
+    stationDepartures[index],
+  );
+});
+
+// ── Phase 5: white dot sticks to the drawn line endpoint ──
+masterTL.to("#path-wagon", { opacity: 1, duration: 0.04 }, drawStart);
 
 // ── Counter dots appear ──
 masterTL.to("#station-counter", { opacity: 1, duration: 0.05 }, 0.36);
 
 // ── Highlight counter dots as wagon passes stations ──
-const stProgress = [0.4, 0.53, 0.63, 0.85];
-stProgress.forEach((p, i) => {
+stationArrivals.forEach((p, i) => {
   masterTL.to(
     `#cdot-${i}`,
     {
@@ -190,10 +314,16 @@ function scrollToMapScene() {
 }
 
 if (window.location.hash === "#map") {
-  window.addEventListener("load", () => {
+  const goToMapWhenReady = () => {
     ScrollTrigger.refresh();
     requestAnimationFrame(scrollToMapScene);
-  });
+  };
+
+  if (document.readyState === "complete") {
+    goToMapWhenReady();
+  } else {
+    window.addEventListener("load", goToMapWhenReady, { once: true });
+  }
 }
 
 /* ─────────────────────────────
