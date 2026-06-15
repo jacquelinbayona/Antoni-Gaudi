@@ -382,22 +382,29 @@ body::after {
   margin-bottom: 14px;
 }
 .arrow-down {
-  width: 18px;
-  height: 18px;
-  border-right: 1.5px solid var(--terracotta);
-  border-bottom: 1.5px solid var(--terracotta);
-  transform: rotate(45deg);
+  width: auto;
+  height: auto;
+  border: 0;
+  color: #47a2ff;
+  font-family: "Eckmania", serif;
+  font-size: 64px;
+  font-weight: 300;
+  line-height: 0.7;
+  transform: rotate(-90deg);
   margin: 0 auto;
   animation: bounce 1.8s ease-in-out infinite;
+}
+.arrow-down::before {
+  content: "←";
 }
 @keyframes bounce {
   0%,
   100% {
-    transform: rotate(45deg) translate(0, 0);
+    transform: rotate(-90deg) translate(0, 0);
     opacity: 0.8;
   }
   50% {
-    transform: rotate(45deg) translate(4px, 4px);
+    transform: rotate(-90deg) translate(-4px, 0);
     opacity: 0.3;
   }
 }

@@ -63,7 +63,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
+  padding: 32px 72px 20px;
   background: transparent;
   backdrop-filter: none;
   border-bottom: none;
@@ -102,7 +102,7 @@ a {
 ────────────────────────────────────── */
 .floating-actions {
   position: fixed;
-  right: 40px;
+  right: 72px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -113,32 +113,48 @@ a {
 
 .audio-btn,
 #openOverlay {
+  --action-stroke: rgba(132, 122, 91, 0.78);
   width: 44px;
   height: 44px;
+  position: relative;
   border-radius: 50%;
-  border: 1px solid rgba(242, 234, 216, 0.2);
-  background: rgba(10, 10, 10, 0.6);
-  backdrop-filter: blur(10px);
+  border: 1.5px solid var(--action-stroke);
+  background: transparent;
+  backdrop-filter: none;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(242, 234, 216, 0.6);
-  font-size: 20px;
-  transition: all 0.3s ease;
+  display: block;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px auto;
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    opacity 0.25s ease;
 }
 
 .audio-btn:hover,
 #openOverlay:hover {
-  border-color: var(--terracotta);
-  color: var(--terracotta);
-  transform: scale(1.1);
+  --action-stroke: rgba(242, 234, 216, 0.82);
+  border-color: var(--action-stroke);
+  transform: scale(1.04);
 }
 
 .audio-btn.playing {
-  border-color: var(--mosaic-gold);
-  color: var(--mosaic-gold);
-  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.18);
+  --action-stroke: rgba(255, 222, 33, 0.78);
+  border-color: var(--action-stroke);
+  box-shadow: 0 0 0 4px rgba(255, 222, 33, 0.08);
+}
+
+.audio-btn {
+  background-image: url("../../assets/svg/audio.svg");
+}
+
+#openOverlay {
+  background-image: url("../../assets/svg/hoja.svg");
 }
 
 /* ──────────────────────────────────
@@ -187,15 +203,16 @@ a {
    HERO SECTION
 ────────────────────────────────────── */
 .hero {
-  min-height: 60vh;
+  min-height: calc(100svh - 104px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 30px;
-  padding: 80px 40px;
+  gap: clamp(16px, 2.7vh, 26px);
+  padding: 24px 40px 48px;
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
 .hero::before {
@@ -211,8 +228,9 @@ a {
 }
 
 .hero-illustration {
-  width: 100%;
-  max-width: 300px;
+  width: auto;
+  max-width: min(430px, 72vw);
+  max-height: 48svh;
   height: auto;
   filter: drop-shadow(0 20px 40px rgba(196, 98, 45, 0.15));
   animation: float 3s ease-in-out infinite;
@@ -230,9 +248,10 @@ a {
 
 .hero h1 {
   font-family: "Eckmania", serif;
-  font-size: 5rem;
+  font-size: clamp(3.25rem, 7.4vw, 5.2rem);
   font-weight: 300;
-  letter-spacing: 2px;
+  line-height: 0.92;
+  letter-spacing: 0;
   text-align: center;
   text-transform: uppercase;
   color: var(--white);
@@ -363,6 +382,42 @@ a {
   width: min(540px, 100%);
   height: auto;
   filter: drop-shadow(0 24px 54px rgba(0, 0, 0, 0.28));
+}
+
+/* ──────────────────────────────────
+   NEXT EXPERIENCE BUTTON
+────────────────────────────────────── */
+.building-next {
+  display: flex;
+  justify-content: center;
+  padding: 0 40px clamp(80px, 12vh, 130px);
+}
+
+.experience-btn {
+  min-width: min(100%, 330px);
+  padding: 18px 28px;
+  border: 1.5px solid rgba(132, 122, 91, 0.78);
+  border-radius: 999px;
+  background: transparent;
+  color: #f2ead8;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.experience-btn:hover,
+.experience-btn:focus {
+  border-color: rgba(242, 234, 216, 0.82);
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 /* ══════════════════════════════════
@@ -562,17 +617,18 @@ a {
 
 @media (max-width: 768px) {
   .building-header {
-    padding: 15px 20px;
+    padding: 24px 32px 15px;
   }
 
   .floating-actions {
-    right: 20px;
+    right: 32px;
     gap: 15px;
   }
 
   .hero {
-    padding: 60px 20px;
-    gap: 20px;
+    min-height: calc(100svh - 78px);
+    padding: 32px 20px;
+    gap: 18px;
   }
 
   .building-content {
@@ -630,7 +686,6 @@ body[data-station] {
 }
 .back-btn {
   flex: 0 0 auto;
-  font-family: "Eckmania", serif;
 }
 .building-header h2 {
   line-height: 1.4;
@@ -640,7 +695,7 @@ body[data-station] {
   width: 100%;
 }
 .hero {
-  min-height: 60svh;
+  min-height: calc(100svh - 104px);
 }
 .hero h1,
 .overlay-content h1 {
@@ -660,8 +715,8 @@ body[data-station] {
     max-width: 760px;
   }
   .hero {
-    min-height: auto;
-    padding-top: 48px;
+    min-height: calc(100svh - 104px);
+    padding-top: 32px;
   }
   .hero h1 {
     font-size: 4rem;
@@ -687,7 +742,7 @@ body[data-station] {
 
 @media (max-width: 768px) {
   .building-header {
-    padding: 15px 20px;
+    padding: 24px 32px 15px;
     align-items: flex-start;
   }
   .back-btn {
@@ -700,7 +755,7 @@ body[data-station] {
     letter-spacing: 2px;
   }
   .floating-actions {
-    right: 16px;
+    right: 28px;
     bottom: 18px;
     top: auto;
     transform: none;
@@ -710,17 +765,23 @@ body[data-station] {
   #openOverlay {
     width: 42px;
     height: 42px;
-    font-size: 18px;
+    font-size: 0;
+  }
+  .audio-btn:hover,
+  #openOverlay:hover {
+    transform: scale(1.04);
   }
   .hero {
-    padding: 46px 20px 56px;
-    gap: 20px;
+    min-height: calc(100svh - 78px);
+    padding: 28px 20px 44px;
+    gap: 18px;
   }
   .hero-illustration {
-    max-width: 230px;
+    max-width: min(340px, 78vw);
+    max-height: 46svh;
   }
   .hero h1 {
-    font-size: 3.1rem;
+    font-size: clamp(2.9rem, 12vw, 3.7rem);
     line-height: 0.95;
   }
   .hero p {
@@ -778,7 +839,7 @@ body[data-station] {
 
 @media (max-width: 430px) {
   .building-header {
-    padding: 14px 16px;
+    padding: 20px 24px 14px;
   }
   .back-btn {
     font-size: 42px;
@@ -790,8 +851,11 @@ body[data-station] {
   .hero {
     padding-inline: 16px;
   }
+  .hero-illustration {
+    max-height: 44svh;
+  }
   .hero h1 {
-    font-size: 2.55rem;
+    font-size: clamp(2.45rem, 12vw, 3.1rem);
   }
   .building-content,
   .overlay-content {
