@@ -171,3 +171,15 @@ if (document.readyState === "loading") {
 
 window.openMapOverlayByBuildingId = openMapOverlayByBuildingId;
 window.closeMapOverlay = closeMapOverlay;
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    buildingMap,
+    createMapOverlay,
+    openMapOverlay,
+    closeMapOverlay,
+    openMapOverlayByBuildingId,
+    bindMapInfoTrigger,
+    initBuildingLinks,
+  };
+}

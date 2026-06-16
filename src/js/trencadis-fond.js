@@ -239,4 +239,13 @@
 
   /* ── Exposer la fonction d'init globalement ── */
   window.initTrencadis = initTrencadis;
+
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+      hexVersRgb,
+      fragmentPolygone,
+      COULEURS,
+      initTrencadis,
+    };
+  }
 })();
