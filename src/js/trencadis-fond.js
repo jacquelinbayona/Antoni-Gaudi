@@ -51,6 +51,7 @@
     /* Insérer en premier enfant du body */
     document.body.insertBefore(canvas, document.body.firstChild);
     ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
     /* Redimensionner et générer les tesselles */
     redimensionner();
@@ -233,6 +234,7 @@
   }
 
   function surTouch(e) {
+    if (!e.touches || e.touches.length === 0) return;
     mx = e.touches[0].clientX;
     my = e.touches[0].clientY;
   }
