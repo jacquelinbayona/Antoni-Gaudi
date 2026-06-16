@@ -57,7 +57,7 @@
 
     /* Écouter les événements souris / touch */
     document.addEventListener("mousemove", surSouris);
-    document.addEventListener("touchmove", surTouch, { passive: false });
+    document.addEventListener("touchmove", surTouch, { passive: true });
     document.addEventListener("touchend", () => {
       mx = -999;
       my = -999;
@@ -233,7 +233,6 @@
   }
 
   function surTouch(e) {
-    e.preventDefault();
     mx = e.touches[0].clientX;
     my = e.touches[0].clientY;
   }
