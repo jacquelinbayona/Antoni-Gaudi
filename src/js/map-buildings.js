@@ -107,14 +107,12 @@ function openMapOverlay(info) {
   overlay.style.right = isLeft
     ? "auto"
     : info.overlayOffset || "clamp(24px, 5vw, 80px)";
-  overlay.classList.remove("hidden");
-  overlay.setAttribute("aria-hidden", "false");
+  showOverlay(overlay);
 }
 
 function closeMapOverlay() {
   if (!activeMapOverlay) return;
-  activeMapOverlay.classList.add("hidden");
-  activeMapOverlay.setAttribute("aria-hidden", "true");
+  hideOverlay(activeMapOverlay);
 }
 
 function openMapOverlayByBuildingId(buildingId) {
@@ -163,11 +161,7 @@ function initBuildingLinks() {
   });
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initBuildingLinks);
-} else {
-  initBuildingLinks();
-}
+onReady(initBuildingLinks);
 
 window.openMapOverlayByBuildingId = openMapOverlayByBuildingId;
 window.closeMapOverlay = closeMapOverlay;

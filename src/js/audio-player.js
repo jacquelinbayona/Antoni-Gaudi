@@ -21,4 +21,4 @@ function initAudioGuide() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initAudioGuide);
+onReady(initAudioGuide);
